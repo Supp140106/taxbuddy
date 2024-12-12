@@ -1,0 +1,19 @@
+{
+  "name": "taxbuddy",
+  "version": "1.0.0",
+  "description": "A optimal solution for tax optimisation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Supp140106/taxbuddy.git"
+  },
+  "author": "Supprit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Supp140106/taxbuddy/issues"
+  },
+  "homepage": "https://github.com/Supp140106/taxbuddy#readme"
+}
