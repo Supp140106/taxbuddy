@@ -1,18 +1,22 @@
 const express = require('express');
-const get = require('./router/get')
-const PORT = 8040;
+const get = require('./router/get');
+const post = require('./router/post')
+const PORT = 3000;
 const app = express();
 
-//middleware
-app.use(express.urlencoded({extended : false}));
+// Middleware 
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/",get);
+// Route Definitions
+app.use("/submit", post);
+app.use("/", get); // This will handle all routes 
 
 
-app.get("/",(req,res)=>{
-    res.send("Home Pages");
-})
-app.listen(PORT,()=>{
-    console.log(`The Server is Running in http://localhost:${PORT}/`)
-})
+app.get("/", (req, res) => {
+    res.send("Home Page");
+});
+
+app.listen(PORT, () => {
+    console.log(`The Server is Running in http://localhost:${PORT}/`);
+});
