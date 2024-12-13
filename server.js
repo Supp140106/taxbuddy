@@ -1,7 +1,8 @@
+require('dotenv').config(); // using .env file
 const express = require('express');
 const get = require('./router/get');
 const post = require('./router/post')
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Middleware 
