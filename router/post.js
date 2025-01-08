@@ -3,6 +3,8 @@ const router = express.Router();
 const taxcal = require('../calculator/taxcalculator')
 
 
+
+// ========================================
 router.post("/income",(req,res)=>{
   const d = new Date();
   const year = d.getFullYear();
@@ -29,7 +31,7 @@ router.post("/income",(req,res)=>{
 
   person.lifeinsurancepremium = parseFloat(persondata.lifeinsurancepremium)||0;
   person.fixeddp_5 = parseFloat(persondata.fixeddp_5)||0;
-  person.ELSS = parseFloat(persondata.ELSS)||0; // Equity linke dsaving scheme
+  person.ELSS = parseFloat(persondata.ELSS)||0; // Equity linked saving scheme
 
   person.homeloan_principal = parseFloat(persondata.homeloan_principal)||0; //percentage home loan principal interest/yr
 
