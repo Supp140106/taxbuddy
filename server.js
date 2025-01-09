@@ -31,10 +31,10 @@ app.get("/", (req, res) => {
 });
 
 //connection mongo db
-mongoose
+/*mongoose
   .connect(process.env.MONGOID)
   .then(() => console.log("Mongo db conected"))
-  .catch((err) => console.log(` error : ${err}`));
+  .catch((err) => console.log(` error : ${err}`));*/
 
 app.listen(PORT, () => {
   console.log(`The Server is Running in http://localhost:${PORT}/`);
