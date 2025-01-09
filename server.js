@@ -25,16 +25,13 @@ app.use("/property",property);
 
 
 
-app.get("/", (req, res) => {
-  res.send("Home Page");
-  db.users.dropIndex("pancardid_1");
-});
+app.use("/",express.static("./public/tax"))
 
 //connection mongo db
-/*mongoose
+mongoose
   .connect(process.env.MONGOID)
   .then(() => console.log("Mongo db conected"))
-  .catch((err) => console.log(` error : ${err}`));*/
+  .catch((err) => console.log(` error : ${err}`));
 
 app.listen(PORT, () => {
   console.log(`The Server is Running in http://localhost:${PORT}/`);

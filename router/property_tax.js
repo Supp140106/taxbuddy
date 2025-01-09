@@ -65,8 +65,69 @@ router.post("/house/buying", (req, res) => {
 });
 
 
-router.post("/house/selling",(req,res)=>{
-    
-})
+function calculateCII(purchase, sale, improvement, ciisaleYear, ciipurchaseYear) {
+    const indexedPurchase = (ciisaleYear / ciipurchaseYear) * purchase;
+    const capitalGainsTax = 0.2 * (sale - (indexedPurchase + improvement));
+    return capitalGainsTax;
+}
 
+
+router.post("/house/selling", (req, res) => {
+    const { purchasePrice, salePrice, improvementCost, purchaseDate } = req.body;
+
+    // Input validation
+    if (
+        typeof purchasePrice !== "number" ||
+        typeof salePrice !== "number" ||
+        typeof improvementCost !== "number" ||
+        !purchaseDate
+    ) {
+        return res.status(400).json({
+            error: "Invalid input. Ensure purchasePrice, salePrice, improvementCost are numbers and purchaseDate is provided in 'yyyy-MM-dd' format.",
+        });
+    }
+
+    const currentDate = new Date();
+    const purchaseDateObj = new Date(purchaseDate);
+    const yearsDifference = currentDate.getFullYear() - purchaseDateObj.getFullYear();
+
+    let tax = 0;
+    let taxType = "";
+
+    if (yearsDifference < 2) {
+        // Short-term capital gains tax
+        tax = 0.3 * (salePrice - (improvementCost + purchasePrice));
+        taxType = "Short-Term Capital Gains Tax";
+    } else {
+        // Long-term capital gains tax with CII
+        const ciiValues = {
+            2023: { saleYear: 363, purchaseYear: 340 },
+            2022: { saleYear: 363, purchaseYear: 324 },
+            2021: { saleYear: 363, purchaseYear: 309 },
+            2020: { saleYear: 363, purchaseYear: 295 },
+            2019: { saleYear: 363, purchaseYear: 285 },
+        };
+
+        const purchaseYear = purchaseDateObj.getFullYear();
+        if (ciiValues[purchaseYear]) {
+            const { saleYear, purchaseYear: ciiPurchaseYear } = ciiValues[purchaseYear];
+            tax = calculateCII(purchasePrice, salePrice, improvementCost, saleYear, ciiPurchaseYear);
+        } else {
+            return res.status(400).json({
+                error: "CII values are not available for the provided purchase year.",
+            });
+        }
+
+        taxType = "Long-Term Capital Gains Tax";
+    }
+
+    res.status(200).json({
+        taxType: taxType,
+        capitalGainsTax: tax.toFixed(2),
+        message:
+            taxType === "Long-Term Capital Gains Tax"
+                ? "By optimizing this data, we calculated your tax with indexation (CII). Without indexation, you would pay an extra tax."
+                : "Short-term capital gains tax applied based on the provided details.",
+    });
+});
 module.exports = router;
