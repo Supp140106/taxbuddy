@@ -17,12 +17,13 @@ router.post("/income",(req,res)=>{
   person.fullname = persondata.fullname;
   person.age = parseInt(persondata.age);
   person.parent = Boolean(persondata.isparent);
-  person.parentage_m = parseInt(persondata.parentage_m)||0;
-  person.parentage_f = parseInt(persondata.parentage_f)||0;
+  person.parent_age_mother = parseInt(persondata.parentage_m)||0;
+  person.parent_age_father = parseInt(persondata.parentage_f)||0;
   person.income_salary = parseFloat(persondata.income_salary)||0;
-  person.income_houseproperty = parseFloat(persondata.income_houseproperty)||0;
+  person.income_houseproperty = (parseFloat(persondata.income_houseproperty)*0.7)||0;
   person.income_buisness = parseFloat(persondata.income_buisness)||0;
   person.income_side = parseFloat(persondata.income_side)||0;
+  person.income_capitalgain = package(persondata.income_capitalgain)||0;
 
   // 80C section => {maximum limit : 1.5 lakhs}
   person.EPF = parseFloat(persondata.EPF)||0; //employee provident fund
