@@ -33,10 +33,10 @@ router.post("/income",(req,res)=>{
   person.lifeinsurancepremium = parseFloat(persondata.lifeinsurancepremium)||0;
   person.fixeddp_5 = parseFloat(persondata.fixeddp_5)||0;
   person.ELSS = parseFloat(persondata.ELSS)||0; // Equity linked saving scheme
-
-  person.homeloan_principal = parseFloat(persondata.homeloan_principal)||0; //percentage home loan principal interest/yr
-
   person.children_tution = parseFloat(persondata.children_tution)||0;
+  person.homeloan_principal = parseFloat(persondata.homeloan_principal)||0; //percentage home loan principal interest/yr
+  person.POTD = parseFloat(persondata.POTD)||0;
+  person.sukanyasamridhi = parseFloat(persondata.sukanyasamridhi)||0;
 
   //80D section =>{maximum limit below 60 : 25000, senior citizen = 50000}
   person.healthinsurance1 = parseFloat(persondata.healthinsurance1)||0; // for self,spouse,children
@@ -119,7 +119,7 @@ router.post("/income",(req,res)=>{
 //All data of Income tax are analysed here
   let taxabinc = person.income_salary + person.income_buisness +person.income_houseproperty + person.income_side;
 
-  let sec80 = Math.min(person.EPF + person.PPF +person.NSC + person.lifeinsurancepremium + person.fixeddp_5 + person.ELSS + person.homeloan_principal + person.children_tution, 150000);
+  let sec80 = Math.min(person.EPF + person.PPF +person.NSC + person.lifeinsurancepremium + person.fixeddp_5 + person.ELSS + person.homeloan_principal + person.children_tution + person.sukanyasamridhi  , 150000);
   
 
   // Health Insurance
