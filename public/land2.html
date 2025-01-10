@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Login</title>
+    <link rel="stylesheet" href="land2.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Tax Buddy</div>
+        <nav>
+            <ul>
+                <li><a href="landing.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- User Details -->
+    <section class="user-details">
+        <h2>Welcome User</h2>
+    </section>
+
+    
+    <section class="main-container">
+        <div class="section" id="income-tax" onclick="redirectTo('income.html')">Income Tax</div>
+        <div class="section" id="property-tax" onclick="redirectTo('property-tax.html')">Property Tax</div>
+        <div class="section" id="vehicle-tax" onclick="redirectTo('vehicle-tax.html')">Vehicle Tax</div>
+    </section>
+
+    <script>
+        // Redirect function
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+    <footer>
+        <div>
+            <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
