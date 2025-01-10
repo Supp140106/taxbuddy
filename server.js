@@ -5,7 +5,7 @@ const get = require("./router/get");
 const post = require("./router/post");
 const authorization = require("./router/authorization");
 const property = require('./router/property_tax')
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT||3000;
 const app = express();
 
 // mongoconnect(process.env.MONGOID) // MAKING CONECTION WITH THE DATA BASE
@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Route Definitions
 app.use("/submit", post);
-app.use("/", get); // This will handle all routes
+ // This will handle all routes
 
 app.use("/auth", authorization); // This is for Sign up and Sign in
 app.use("/property",property);

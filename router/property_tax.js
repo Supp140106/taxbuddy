@@ -130,4 +130,102 @@ router.post("/house/selling", (req, res) => {
                 : "Short-term capital gains tax applied based on the provided details.",
     });
 });
+
+
+
+
+
+
+
+const stateTaxRates = {
+    Karnataka: { petrolTaxBelow1000: 13, petrolTaxAbove1500: 18, dieselTaxAbove1500: 18, electricTax: 0 },
+    Maharashtra: { petrolTaxBelow1000: 11, petrolTaxAbove1500: 13, dieselTaxAbove1500: 13, electricTax: 0 },
+    Delhi: { petrolTaxBelow1000: 4, petrolTaxAbove1500: 12.5, dieselTaxAbove1500: 12.5, electricTax: 4 },
+    TamilNadu: { petrolTaxBelow1000: 10, petrolTaxAbove1500: 15, dieselTaxAbove1500: 15, electricTax: 0 },
+    Kerala: { petrolTaxBelow1000: 12, petrolTaxAbove1500: 16, dieselTaxAbove1500: 16, electricTax: 0 },
+    UttarPradesh: { petrolTaxBelow1000: 8, petrolTaxAbove1500: 14, dieselTaxAbove1500: 14, electricTax: 0 },
+    AndhraPradesh: { petrolTaxBelow1000: 10, petrolTaxAbove1500: 14, dieselTaxAbove1500: 14, electricTax: 0 },
+    Gujarat: { petrolTaxBelow1000: 9, petrolTaxAbove1500: 12, dieselTaxAbove1500: 12, electricTax: 0 },
+    WestBengal: { petrolTaxBelow1000: 7, petrolTaxAbove1500: 12, dieselTaxAbove1500: 12, electricTax: 2 },
+    Rajasthan: { petrolTaxBelow1000: 5, petrolTaxAbove1500: 10, dieselTaxAbove1500: 10, electricTax: 0 },
+    MadhyaPradesh: { petrolTaxBelow1000: 8, petrolTaxAbove1500: 13, dieselTaxAbove1500: 13, electricTax: 0 },
+    Bihar: { petrolTaxBelow1000: 6, petrolTaxAbove1500: 11, dieselTaxAbove1500: 11, electricTax: 0 },
+    Haryana: { petrolTaxBelow1000: 9, petrolTaxAbove1500: 14, dieselTaxAbove1500: 14, electricTax: 0 },
+    Punjab: { petrolTaxBelow1000: 10, petrolTaxAbove1500: 15, dieselTaxAbove1500: 15, electricTax: 0 },
+    Odisha: { petrolTaxBelow1000: 8, petrolTaxAbove1500: 12, dieselTaxAbove1500: 12, electricTax: 0 },
+    Chhattisgarh: { petrolTaxBelow1000: 7, petrolTaxAbove1500: 11, dieselTaxAbove1500: 11, electricTax: 0 },
+    Uttarakhand: { petrolTaxBelow1000: 6, petrolTaxAbove1500: 10, dieselTaxAbove1500: 10, electricTax: 0 },
+    Assam: { petrolTaxBelow1000: 5, petrolTaxAbove1500: 9, dieselTaxAbove1500: 9, electricTax: 0 },
+    Goa: { petrolTaxBelow1000: 6, petrolTaxAbove1500: 10, dieselTaxAbove1500: 10, electricTax: 0 },
+    JammuAndKashmir: { petrolTaxBelow1000: 4, petrolTaxAbove1500: 8, dieselTaxAbove1500: 8, electricTax: 0 },
+    HimachalPradesh: { petrolTaxBelow1000: 6, petrolTaxAbove1500: 11, dieselTaxAbove1500: 11, electricTax: 0 },
+    Tripura: { petrolTaxBelow1000: 5, petrolTaxAbove1500: 10, dieselTaxAbove1500: 10, electricTax: 0 },
+    Nagaland: { petrolTaxBelow1000: 7, petrolTaxAbove1500: 13, dieselTaxAbove1500: 13, electricTax: 0 },
+};
+
+// Calculate road tax
+const calculateRoadTax = (exShowroomPrice, rates, fuelType, engineCapacity) => {
+    if (fuelType === 'Electric') {
+        return exShowroomPrice * (rates.electricTax / 100);
+    } else if (fuelType === 'Petrol') {
+        if (engineCapacity <= 1000) return exShowroomPrice * (rates.petrolTaxBelow1000 / 100);
+        if (engineCapacity > 1500) return exShowroomPrice * (rates.petrolTaxAbove1500 / 100);
+    } else if (fuelType === 'Diesel') {
+        if (engineCapacity > 1500) return exShowroomPrice * (rates.dieselTaxAbove1500 / 100);
+    }
+    return 0;
+};
+
+// Calculate TCS
+const calculateTCS = (exShowroomPrice) => {
+    const tcsThreshold = 1000000; // ₹10 lakh
+    const tcsRate = 1; // 1% TCS
+    return exShowroomPrice > tcsThreshold ? exShowroomPrice * (tcsRate / 100) : 0;
+};
+
+// Calculate insurance
+const calculateInsurance = (exShowroomPrice) => {
+    const insuranceRate = 4; // 4% of ex-showroom price
+    return exShowroomPrice * (insuranceRate / 100);
+};
+
+// API Endpoint
+router.post('/car/selling', (req, res) => {
+    const { state, exShowroomPrice, fuelType, engineCapacity } = req.body;
+
+    // Validate input
+    if (!stateTaxRates[state]) {
+        return res.status(400).json({ error: 'Invalid state provided' });
+    }
+
+    // Retrieve state-specific tax rates
+    const rates = stateTaxRates[state];
+
+    // Calculate components
+    const roadTax = calculateRoadTax(exShowroomPrice, rates, fuelType, engineCapacity);
+    const tcs = calculateTCS(exShowroomPrice);
+    const insurance = calculateInsurance(exShowroomPrice);
+    const registrationFee = 1000; // Fixed cost
+    const fastagFee = 500; // Fixed cost
+    const totalCost = exShowroomPrice + roadTax + tcs + insurance + registrationFee + fastagFee;
+
+    // Response object
+    const response = {
+        state,
+        exShowroomPrice,
+        fuelType,
+        engineCapacity,
+        breakdown: {
+            roadTax,
+            registrationFee,
+            insurance,
+            fastagFee,
+            tcs,
+        },
+        totalOnRoadPrice: totalCost,
+    };
+
+    res.json(response);
+});
+
 module.exports = router;
