@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Tax Form</title>
+    <link rel="stylesheet" href="income.css">
+</head>
+<body>
+    <header>
+            <div class="logo">TaxBuddy</div>
+            <nav>
+                <ul>
+                    <li><a href="land2.html">Back</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </nav>
+    </header>
+    <main>
+        <!-- Section 1: Personal Details -->
+        <section class="form-section" id="personal-details">
+            <h2>Personal Details</h2>
+            <label for="full-name">Full Name:</label>
+            <input type="text" id="full-name" placeholder="Enter your full name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter your age" min="1" required>
+
+            <label for="occupation">Occupation:</label>
+            <input type="text" id="occupation" placeholder="Enter your occupation" required>
+
+            </div>
+        </section>
+
+        <!-- Section 2: Income Details -->
+        <section class="form-section" id="income-details">
+            <h2>Income Details</h2>
+            <label for="salary-income">Salary Income:</label>
+            <input type="number" id="salary-income" placeholder="Enter salary income">
+
+            <label for="house-income">Income from House Property:</label>
+            <input type="number" id="house-income" placeholder="Enter house property income">
+
+            <label for="business-income">Income from Business:</label>
+            <input type="number" id="business-income" placeholder="Enter business income">
+
+            <label for="other-income">Income from Other Sources:</label>
+            <input type="number" id="other-income" placeholder="Enter income from other sources">
+
+            <label for="capital-gain">Capital Gain Income:</label>
+            <input type="number" id="capital-gain" placeholder="Enter capital gain income">
+        </section>
+
+        <!-- Section 3: Section 80C Details -->
+        <section class="form-section" id="section-80c">
+            <h2>Section 80C Details</h2>
+            <label for="epf">EPF <span class="info-icon" data-tooltip="Employee Provident Fund: A retirement savings scheme.">ℹ️</span>:</label>
+            <input type="number" id="epf" placeholder="Enter EPF amount" >
+
+            <label for="ppf">PPF <span class="info-icon" data-tooltip="Public Provident Fund: Long-term investment option for saving taxes.">ℹ️</span>:</label>
+            <input type="number" id="ppf" placeholder="Enter PPF amount" >
+
+            <label for="nsc">NSC <span class="info-icon" data-tooltip="National Savings Certificate: A fixed return investment.">ℹ️</span>:</label>
+            <input type="number" id="nsc" placeholder="Enter NSC amount" >
+
+            <label for="fd">FD ( minimum 5 years ) <span class="info-icon" data-tooltip="Fixed Deposit: A financial instrument that offers a higher rate of interest.">ℹ️</span>:</label>
+            <input type="number" id="fd" placeholder="Enter FD amount" >
+
+            <label for="life-insurance">Life Insurance:</label>
+            <input type="number" id="life-insurance" placeholder="Enter life insurance amount" >
+
+            <label for="elss">ELSS <span class="info-icon" data-tooltip="Equity Linked Savings Scheme: Tax-saving mutual funds.">ℹ️</span>:</label>
+            <input type="number" id="elss" placeholder="Enter ELSS amount" >
+
+            <label for="losd">LOSD <span class="info-icon" data-tooltip="Life Insurance Savings Deposit: A savings option for insurance and taxes.">ℹ️</span>:</label>
+            <input type="number" id="losd" placeholder="Enter LOSD amount" >
+
+            <label for="home-loan">Home Loan Principal:</label>
+            <input type="number" id="home-loan" placeholder="Enter Home Loan Principal amount" >
+
+            <label for="sukanya">Sukanya Samriddhi Yojana <span class="info-icon" data-tooltip="A savings scheme for the girl child.">ℹ️</span>:</label>
+            <input type="number" id="sukanya" placeholder="Enter Sukanya Samriddhi Yojana amount" >
+
+            <label for="children-tuition">Children's Tuition Fee (Max 2 children):</label>
+            <input type="number" id="children-tuition" placeholder="Enter Tuition amount" >
+        </section>
+        
+       <!--Section 4 : Section 80D -->     
+        <section class="form-section" id="section-80d">
+            <h2>Section 80D Details</h2>
+            <label for="self-health-insurance">Health Insurance (Self, Spouse & Children) <span class="info-icon" data-tooltip="Healthcare: Tax-saving for health insurance.">ℹ️</span>:</label>
+            <input type="number" id="self-health-insurance" placeholder="Enter Health Insurance amount" >
+
+            <div id="parents-details">
+                <h2>Are your parents alive?</h2>
+                <input type="radio" id="parents-alive-yes" name="parents-alive" value="yes">
+                <label for="parents-alive-yes"  class="yes-no-box">Yes</label>
+                
+                <input type="radio" id="parents-alive-no" name="parents-alive" value="no">
+                <label for="parents-alive-no"  class="yes-no-box">No</label>
+            
+   
+                <!-- Dynamic Part for Parents' Details -->
+                <div id="parents-extra-details" style="display: none; margin-top: 15px;">
+                    <label for="parents-age">Parents' Age:</label>
+                    <input type="number" id="father's age" placeholder="Enter age of father">
+                    <input type="number" id="mother's age" placeholder="Enter age of mother">
+            
+                    <label for="parents-health-insurance">Parents' Health Insurance:</label>
+                    <input type="number" id="parents-health-insurance" placeholder="Enter Health Insurance amount for parents" >
+                </div>
+            </div></button>
+        </section>
+
+        <!-- Section 80TTA/80TTB -->
+        <section class="form-section" id="section-80tta-80ttb">
+            <h2>Section 80TTA/80TTB Details</h2>
+            <label for="savings-interest">Interest from Savings Account:</label>
+            <input type="number" id="savings-interest" placeholder="Enter interest from Savings Account" >
+
+            <label for="fd-interest">Interest from Fixed Deposits:</label>
+            <input type="number" id="fd-interest" placeholder="Enter interest from Fixed Deposits"  >
+
+
+        </section>
+ <!-- Section 80E (Education Loan) -->
+ <section class="form-section" id="section-80e">
+    <h2>Section 80E </h2>
+    <label>Do you have an education loan?<span class="info-icon" data-tooltip="Section 80E allows tax deductions on the interest paid for an education loan.">ℹ️</span>:</label>
+    <input type="radio" id="education-loan-yes" name="education-loan" value="yes">
+    <label for="education-loan-yes" class="yes-no-box">Yes</label>
+    <input type="radio" id="education-loan-no" name="education-loan" value="no">
+    <label for="education-loan-no" class="yes-no-box">No</label>
+    
+    <!-- Dynamic Inputs for Loan Details -->
+    <div id="education-loan-details" style="display: none; margin-top: 15px;">
+        <label for="loan-amount">Loan Amount (₹):</label>
+        <input type="number" id="loan-amount" placeholder="Enter loan amount">
+
+        <label for="loan-year">Year of Loan Sanction:</label>
+        <input type="number" id="loan-year" placeholder="Enter year (e.g., 2020)">
+    </div>
+ </section>
+
+    <!-- Section 80G (Donations) -->
+<section class="form-section" id="section-80g">
+    <h2>Section 80G - Donations <span class="info-icon" data-tooltip="Section 80G allows tax deductions for donations made to specified funds and charitable organizations.">ℹ️</span></h2>
+    
+    <!-- Donation 1: PM CARES Fund and National Defence Fund -->
+    <h3>Donation 1: PM CARES Fund & National Defence Fund</h3>
+    <label for="pm-cares-fund">Donation 1 <span class="info-icon" data-tooltip="Donations made to the PM CARES Fund or National Defence Fund are eligible for tax deductions.">ℹ️</span>:</label>
+    <input type="number" id="pm-cares-fund" placeholder="Enter donation amount" >
+
+    <!-- Donation 2: Local NGO Donations -->
+    <h3>Donation 2: Donations to Local NGOs</h3>
+    <label for="local-ngo-donations">Donation 2 <span class="info-icon" data-tooltip="Donations made to local NGOs that are registered with the government are eligible for tax deductions.">ℹ️</span>:</label>
+    <input type="number" id="local-ngo-donations" placeholder="Enter donation amount " >
+
+</section>
+
+<!-- Section: HRA, Metro City, Leave Travel Allowance -->
+<section class="form-section" id="hra-lta">
+    <h2> Allowances </h2>
+    
+    <!-- HRA (House Rent Allowance) -->
+    <h4 for="hra">House Rent Allowance (HRA) <span class="info-icon" data-tooltip="HRA: A portion of your salary provided by your employer for accommodation.">ℹ️</span>:</h4>
+    <input type="number" id="hra" placeholder="Enter HRA amount (if any)" >
+
+    <!-- Leave Travel Allowance (LTA) -->
+    <h4 for="lta">Leave Travel Allowance (LTA) <span class="info-icon" data-tooltip="LTA: An allowance provided by your employer to cover travel expenses.">ℹ️</span>:</h4>
+    <input type="number" id="lta" placeholder="Enter LTA amount (if any)" >
+
+
+
+    <!-- Metro City Yes/No in boxes -->
+    <div class="metro-city">
+        <h3>Do you live in a Metro City?</h3>
+        <div class="checkbox-group">
+                <input type="radio" id="metro-yes" name="metro-city" value="yes">
+                <label for="metro-yes" class="checkbox-box">Yes</label>
+            
+                <input type="radio" id="metro-no" name="metro-city" value="no">
+                <label for="metro-no" class="checkbox-box">No</label>
+        </div>
+    </div>
+</section>
+<!-- Section 80EE & 80EEA -->
+<section class="form-section" id="section-80ee-80eea">
+    <h2>Section 80EE & 80EEA Details</h2>
+    
+    <label for="loan-sanction-period">Did you take the loan during the sanctioned period (1st April 2016 to 31st March 2017 for 80EE or 1st April 2019 to 31st March 2022 for 80EEA)?</label>
+    
+    <!-- Yes/No options in boxes -->
+    <div class="yes-no-options">
+        <input type="radio" id="loan-sanction-yes" name="loan-sanction" value="yes">
+        <label for="loan-sanction-yes" class="yes-no-box">Yes</label>
+        
+        <input type="radio" id="loan-sanction-no" name="loan-sanction" value="no">
+        <label for="loan-sanction-no" class="yes-no-box">No</label>
+    </div>
+
+    <!-- Question for First-time Homebuyer -->
+    <div id="first-home-question" style="display: none;">
+        <label for="first-home">Is this your first house purchase?</label>
+        
+        <!-- Yes/No options in boxes -->
+        <div class="yes-no-options">
+            <input type="radio" id="first-home-yes" name="first-home" value="yes">
+            <label for="first-home-yes" class="yes-no-box">Yes</label>
+            
+            <input type="radio" id="first-home-no" name="first-home" value="no">
+            <label for="first-home-no" class="yes-no-box">No</label>
+        </div>
+    </div>
+
+    <!-- Question if Loan is Ongoing -->
+    <div id="loan-ongoing-question" style="display: none;">
+        <label for="loan-ongoing">Is the loan still ongoing?</label>
+        
+        <!-- Yes/No options in boxes -->
+        <div class="yes-no-options">
+            <input type="radio" id="loan-ongoing-yes" name="loan-ongoing" value="yes">
+            <label for="loan-ongoing-yes" class="yes-no-box">Yes</label>
+            
+            <input type="radio" id="loan-ongoing-no" name="loan-ongoing" value="no">
+            <label for="loan-ongoing-no" class="yes-no-box">No</label>
+        </div>
+    
+            <!-- Loan sanction period -->
+          <label for="loan-sanction-period">Select the loan sanction period:</label>
+           <div class="horizontal-options">
+                <input type="radio" id="year-2016-2017" name="loan-year" value="2016-2017">
+             <label for="year-2016-2017" class="box-option">2016-2017</label>
+        
+              <input type="radio" id="year-2019-2022" name="loan-year" value="2019-2022">
+              <label for="year-2019-2022" class="box-option">2019-2022</label>
+          </div>
+
+
+    <!-- Time Period for Loan -->
+    <div id="loan-time-period" style="display: none; margin-top: 15px;">
+        <label for="loan-time">Loan Amount (₹):</label>
+        <input type="text" id="loan-time-input" placeholder="Enter amount">
+    </div>
+</section>
+
+<!-- Disability Section -->
+<div class="form-section" id="disability-section"  >
+    <h2>Do you have any disability?</h2>
+
+
+    <!-- Yes/No options in boxes -->
+    <div class="yes-no-options">
+        <input type="radio" id="disability-yes" name="disability" value="yes">
+        <label for="disability-yes" class="yes-no-box">Yes</label>
+        
+        <input type="radio" id="disability-no" name="disability" value="no">
+        <label for="disability-no" class="yes-no-box">No</label>
+    </div>
+  
+    <div id="disability-percentage" style="display: none;">
+        <label for="disability-percent">What is your disability percentage?</label>
+        <input type="number" id="disability-percent" name="disability-percent" placeholder="Enter percentage" min="0" max="100" />
+    </div>
+</div>
+
+<!-- National Pension Scheme Section -->
+ <section>
+<div class="form-section" id="nps-section">
+    <h2>Are you part of the National Pension Scheme?</h2>
+    <div class="yes-no-options">
+            <input type="radio" id="nps-yes" name="nps" value="yes" />
+            <label for="nps-yes" class="yes-no-box" >Yes</label>
+         
+            <input type="radio" id="nps-no" name="nps" value="no" />
+            <label for="nps-no"  class="yes-no-box">No</label>
+    </div>
+    <div id="nps-details" style="display: none;">
+        <label for="nps-info">Please provide your NPS details:</label>
+        <input type="text" id="nps-info" name="nps-info" placeholder="Enter NPS amount" />
+    </div>
+</section>
+</div>
+
+<div> <button type="submit">Submit</button></div>
+</main> <footer>
+    <div>
+        <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+
+
+
+<script src="income.js"></script>
+</body>
+</html>
