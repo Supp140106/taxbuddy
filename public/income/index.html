@@ -19,6 +19,7 @@
             </nav>
     </header>
     <main>
+        <div class="form-data">
         <!-- Section 1: Personal Details -->
         <section class="form-section" id="personal-details">
             <h2>Personal Details</h2>
@@ -73,9 +74,6 @@
 
             <label for="elss">ELSS <span class="info-icon" data-tooltip="Equity Linked Savings Scheme: Tax-saving mutual funds.">ℹ️</span>:</label>
             <input type="number" id="elss" placeholder="Enter ELSS amount" >
-
-            <label for="losd">LOSD <span class="info-icon" data-tooltip="Life Insurance Savings Deposit: A savings option for insurance and taxes.">ℹ️</span>:</label>
-            <input type="number" id="losd" placeholder="Enter LOSD amount" >
 
             <label for="home-loan">Home Loan Principal:</label>
             <input type="number" id="home-loan" placeholder="Enter Home Loan Principal amount" >
@@ -172,6 +170,9 @@
     <h4 for="lta">Leave Travel Allowance (LTA) <span class="info-icon" data-tooltip="LTA: An allowance provided by your employer to cover travel expenses.">ℹ️</span>:</h4>
     <input type="number" id="lta" placeholder="Enter LTA amount (if any)" >
 
+    <h4 for="rentpaid">Rent Paid Anually <span class="info-icon" data-tooltip="The Amount of rent paind by you in a year.">ℹ️</span>:</h4>
+    <input type="number" id="rentpaid" placeholder="Enter amount of House Rent Paid" >
+
 
 
     <!-- Metro City Yes/No in boxes -->
@@ -228,21 +229,22 @@
             <label for="loan-ongoing-no" class="yes-no-box">No</label>
         </div>
     
-            <!-- Loan sanction period -->
-          <label for="loan-sanction-period">Select the loan sanction period:</label>
-           <div class="horizontal-options">
-                <input type="radio" id="year-2016-2017" name="loan-year" value="2016-2017">
-             <label for="year-2016-2017" class="box-option">2016-2017</label>
+            
+        <!-- Loan sanction period -->
         
-              <input type="radio" id="year-2019-2022" name="loan-year" value="2019-2022">
-              <label for="year-2019-2022" class="box-option">2019-2022</label>
-          </div>
+        
 
 
     <!-- Time Period for Loan -->
     <div id="loan-time-period" style="display: none; margin-top: 15px;">
+        <label for="loan-sanction-period">Enter the loan sanction year:( Between 2016-2017 or 2019-2022 )</label>
+        <input type="number" id="loan-sanction-year" placeholder="Enter sanction year (if any)" >
+
         <label for="loan-time">Loan Amount (₹):</label>
         <input type="text" id="loan-time-input" placeholder="Enter amount">
+
+        <label for="property-value">Property value (₹):</label>
+        <input type="text" id="Property-value-input" placeholder="Enter amount">
     </div>
 </section>
 
@@ -284,8 +286,11 @@
 </section>
 </div>
 
-<div> <button type="submit">Submit</button></div>
-</main> <footer>
+<div> <button type="submit" id="submit-btn">Submit</button></div>
+</div>
+</main> 
+
+<footer>
     <div>
         <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
     </div>
@@ -295,5 +300,6 @@
 
 
 <script src="income.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

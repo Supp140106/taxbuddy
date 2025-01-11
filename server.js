@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const get = require("./router/get");
 const post = require("./router/post");
+const form = require("./router/form")
 const authorization = require("./router/authorization");
 const property = require('./router/property_tax')
 const PORT = process.env.PORT|| 3000;
@@ -20,10 +21,7 @@ app.use("/submit", post);
 
 app.use("/auth", authorization); // This is for Sign up and Sign in
 app.use("/property",property);
-
-
-
-
+app.use("/form",form);
 
 app.use("/",express.static("./public/tax"))
 
