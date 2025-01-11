@@ -18,7 +18,7 @@
                 </ul>
             </nav>
     </header>
-    <main>
+    <main id="mainform">
         <div class="form-data">
         <!-- Section 1: Personal Details -->
         <section class="form-section" id="personal-details">
@@ -286,15 +286,65 @@
 </section>
 </div>
 
-<div> <button type="submit" id="submit-btn">Submit</button></div>
+<div class="center-button-container">
+    <button type="button" id="submit-btn"> Submit</button>
 </div>
 </main> 
+
+
+
+
+<div class="taxresult">
+    <section class="calculator">
+        <h1 id="Taxsummary">Your Tax Summary</h1>
+        <div class="summary-box">
+            <div class="tax-item">
+                <label class="result">Old Regime Tax:</label>
+                <span id="old-tax">₹0</span>
+            </div>
+            <div class="tax-item">
+                <label class="result">New Regime Tax (2024):</label>
+                <span id="new-tax-2024">₹0</span>
+            </div>
+            <div class="tax-item">
+                <label class="result">New Regime Tax (2025):</label>
+                <span id="new-tax-2025">₹0</span>
+            </div>
+            <div class="statement">
+                <p id="statement">Please input values to calculate taxes.</p>
+            </div>
+        </div>
+        <div class="center-button">
+            <button type="button" id="go-back">Back to Calculator</button>
+        </div>
+    </section>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <footer>
     <div>
         <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
     </div>
 </footer>
+</main> 
+
+
 </body>
 
 

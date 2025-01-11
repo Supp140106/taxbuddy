@@ -43,7 +43,7 @@ header nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
     position: relative;
     transition: color 0.4s, transform 0.4s;
 }
@@ -319,7 +319,7 @@ footer {
     background-color: rgba(0, 150, 136, 0.8);
     color: white;
     text-align: center;
-    padding: 25px;
+    padding: 15px;
     position: relative;
     backdrop-filter: blur(10px);
     margin-top: auto;
@@ -337,4 +337,96 @@ footer::before {
     opacity: 0.1;
     pointer-events: none;
     z-index: -1;
+}
+
+.center-button-container {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 10vh; /* Ensures the container takes full height */
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.summary-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.tax-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.statement {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-left: 4px solid #4caf50;
+    font-style: italic;
+}
+
+.result {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#Taxsummary {
+    text-align: center; /* Horizontally centers the text */
+    margin: 0 auto;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.center-button {
+    margin-bottom: 10px;
+    display: flex;            /* Use flexbox for centering */
+    justify-content: center;  /* Horizontally center the button */
+    align-items: center;      /* Vertically center the button (if needed) */
+    height: 100%;             /* Optional: Ensure the div takes full height for vertical centering */
+}
+
+
+
+
+.taxresult {
+    display: none;
 }

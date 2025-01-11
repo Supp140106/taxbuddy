@@ -100,4 +100,25 @@ document.addEventListener('DOMContentLoaded', function () {
         npsDetails.style.display = 'none';
     });
 });
+
+
+// Function to move the cursor to the next input field when "Enter" is pressed
+document.addEventListener("DOMContentLoaded", function() {
+    const inputs = document.querySelectorAll("input, select, textarea"); // Select all input fields
+
+    inputs.forEach((input, index) => {
+        input.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                // Prevent the default "Enter" key action (e.g., form submission)
+                event.preventDefault();
+
+                // Move the cursor to the next input field if it exists
+                const nextInput = inputs[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        });
+    });
+});
    

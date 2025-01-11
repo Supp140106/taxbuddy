@@ -100,22 +100,98 @@ async function fetchdata() {
     }
 }
 
+
+
+
+
+
+// Code for displaying Tax result
+const taxResult = document.querySelector(".taxresult");
+
+const oldtax = document.getElementById("old-tax");
+const newtax2024 = document.getElementById("new-tax-2024");
+const newtax2025 = document.getElementById("new-tax-2025");
+const aistatement = document.getElementById("statement");
+
 // Event listener for the submit button
 document
     .getElementById("submit-btn")
     .addEventListener("click", async function () {
+        //checking for the inputs
+        const fullName = document.getElementById("full-name").value.trim();
+        const age = document.getElementById("age").value.trim();
+
+        // Check if fields are filled
+        if (!fullName) {
+            alert("Full Name is required.");
+            return; // Stop further execution
+        }
+
+        if (!age || age <= 0) {
+            alert("Please enter a valid age greater than 0.");
+            return; // Stop further execution
+        }
+
+        const salaryIncome = document.getElementById("salary-income").value.trim();
+        const businessIncome = document.getElementById("business-income").value.trim();
+
+        // Check if at least one of the fields is filled
+        if (!salaryIncome && !businessIncome) {
+            alert("Please fill at least one income field.");
+            return; // Stop further execution
+        }
+
+
+
+
         const sectionsToHide = document.querySelectorAll(
             ".form-section"
         );
+
         sectionsToHide.forEach((section) => {
             section.style.display = "none";
         });
 
+        this.style.display = "none";
+        const mainForm = document.getElementById("mainform");
+        mainForm.style.display = "none"; // Hide the main form
         // Show only the Personal Details section
         // document.getElementById("personal-details").style.display = "block";
         const personData = await getData();
         console.log(personData);
         let data = await fetchdata();
+        taxResult.style.display = "block";
+        oldtax.innerText = `₹${data.old}`;
+        newtax2024.innerText = `₹${data.new24}`;
+        newtax2025.innerText = `₹${data.new25}`;
+        aistatement.innerText = `${data.statement}`
         console.log(data)
+
+        
         // Log the data to the console
     });
+
+
+
+
+
+
+    // Go back to form
+
+    document.getElementById("go-back").addEventListener("click",()=>{
+        const sectionsToHide = document.querySelectorAll(
+            ".form-section"
+        );
+
+        sectionsToHide.forEach((section) => {
+            section.style.display = "block";
+        });
+
+        let submtbutton = document.getElementById("submit-btn")
+        submtbutton.style.display = "block";
+        const mainForm = document.getElementById("mainform");
+        mainForm.style.display = "block";
+
+        const taxResult = document.querySelector(".taxresult");
+        taxResult.style.display = "none";
+    })
