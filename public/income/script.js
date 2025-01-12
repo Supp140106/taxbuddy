@@ -34,6 +34,7 @@ function getData() {
         PPF: Number(document.getElementById("ppf")?.value) || 0,
         NSC: Number(document.getElementById("nsc")?.value) || 0,
         fixeddp_5: Number(document.getElementById("fd")?.value) || 0,
+        POTD : Number(document.getElementById("potd")?.value) || 0,
         lifeinsurancepremium:
             Number(document.getElementById("life-insurance")?.value) || 0,
         ElSS: Number(document.getElementById("elss")?.value) || 0,
@@ -153,10 +154,18 @@ document
         });
 
         this.style.display = "none";
+
+
         const mainForm = document.getElementById("mainform");
         mainForm.style.display = "none"; // Hide the main form
         // Show only the Personal Details section
         // document.getElementById("personal-details").style.display = "block";
+
+        const loadingWrapper = document.querySelector('.loading-wrapper');
+        if (loadingWrapper) {
+            loadingWrapper.style.display = 'flex'; // Show the loading wrapper
+        }
+
         const personData = await getData();
         console.log(personData);
         let data = await fetchdata();
@@ -166,6 +175,10 @@ document
         newtax2025.innerText = `₹${data.new25}`;
         aistatement.innerText = `${data.statement}`
         console.log(data)
+
+        if (loadingWrapper) {
+            loadingWrapper.style.display = 'none'; // Hide the loading wrapper
+        }
 
         
         // Log the data to the console

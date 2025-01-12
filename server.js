@@ -23,7 +23,8 @@ app.use("/auth", authorization); // This is for Sign up and Sign in
 app.use("/property",property);
 app.use("/form",form);
 
-app.use("/",express.static("./public/tax"))
+app.use("/",express.static("./public/home"))
+app.use("/",get);
 
 //connection mongo db
 mongoose

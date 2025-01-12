@@ -1,0 +1,152 @@
+[
+  {
+    "state": "Andhra Pradesh",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "male_stamp_duty_percentage": 5,
+    "female_stamp_duty_percentage": 4
+  },
+  {
+    "state": "Assam",
+    "male_stamp_duty_percentage": 6,
+    "female_stamp_duty_percentage": 5
+  },
+  {
+    "state": "Bihar",
+    "male_stamp_duty_percentage": 5,
+    "female_stamp_duty_percentage": 4
+  },
+  {
+    "state": "Chhattisgarh",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Delhi",
+    "male_stamp_duty_percentage": 6,
+    "female_stamp_duty_percentage": 5
+  },
+  {
+    "state": "Goa",
+    "male_stamp_duty_percentage": 6,
+    "female_stamp_duty_percentage": 5
+  },
+  {
+    "state": "Gujarat",
+    "male_stamp_duty_percentage": 4.9,
+    "female_stamp_duty_percentage": 3.9
+  },
+  {
+    "state": "Haryana",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Himachal Pradesh",
+    "male_stamp_duty_percentage": 6,
+    "female_stamp_duty_percentage": 5
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "male_stamp_duty_percentage": 5,
+    "female_stamp_duty_percentage": 4
+  },
+  {
+    "state": "Jharkhand",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Karnataka",
+    "male_stamp_duty_percentage": 5.6,
+    "female_stamp_duty_percentage": 4.6
+  },
+  {
+    "state": "Kerala",
+    "male_stamp_duty_percentage": 8,
+    "female_stamp_duty_percentage": 7
+  },
+  {
+    "state": "Madhya Pradesh",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Maharashtra",
+    "male_stamp_duty_percentage": 5,
+    "female_stamp_duty_percentage": 4
+  },
+  {
+    "state": "Manipur",
+    "male_stamp_duty_percentage": 6,
+    "female_stamp_duty_percentage": 5
+  },
+  {
+    "state": "Meghalaya",
+    "male_stamp_duty_percentage": 5,
+    "female_stamp_duty_percentage": 4
+  },
+  {
+    "state": "Mizoram",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Nagaland",
+    "male_stamp_duty_percentage": 5,
+    "female_stamp_duty_percentage": 4
+  },
+  {
+    "state": "Odisha",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Punjab",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Rajasthan",
+    "male_stamp_duty_percentage": 6,
+    "female_stamp_duty_percentage": 5
+  },
+  {
+    "state": "Sikkim",
+    "male_stamp_duty_percentage": 4,
+    "female_stamp_duty_percentage": 3
+  },
+  {
+    "state": "Tamil Nadu",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Telangana",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Tripura",
+    "male_stamp_duty_percentage": 6,
+    "female_stamp_duty_percentage": 5
+  },
+  {
+    "state": "Uttar Pradesh",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "Uttarakhand",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  },
+  {
+    "state": "West Bengal",
+    "male_stamp_duty_percentage": 7,
+    "female_stamp_duty_percentage": 6
+  }
+]

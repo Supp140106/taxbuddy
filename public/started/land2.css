@@ -45,7 +45,7 @@ header nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
     position: relative;
     transition: color 0.4s, transform 0.4s;
 }
@@ -78,13 +78,13 @@ main {
     align-items: center;
     text-align: center;
     height: calc(100vh - 150px); /* Adjust for header and footer space */
-    padding: 20px;
+    padding: 40px;
     flex: 1;
 }
 
 /* Center the Welcome Text */
 .welcome-text {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #333;
 }
@@ -95,7 +95,7 @@ main {
     justify-content: center;
     gap: 20px; /* Spacing between buttons */
     flex-wrap: wrap;
-    margin: 20px auto;
+    margin: 40px auto;
     width: 100%;
     max-width: 800px;
 }
@@ -105,15 +105,15 @@ main {
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 50px 30px;
+    padding: 30px 40px;
     text-align: center;
     cursor: pointer;
-    font-size: 1.4rem;  /* Increased text size */
+    font-size: 1.5rem;  /* Increased text size */
     font-weight: bold;
     color: #333;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 220px;  /* Increased button size */
-    min-height: 150px;  /* Ensure buttons are bigger */
+    width: 130px;  /* Increased button size */
+    min-height: 100px;  /* Ensure buttons are bigger */
 }
 
 .section:hover {

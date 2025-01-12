@@ -3,11 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff; /* Light sky blue background */
-    color: #2c3e50; /* Darker text color for better readability */
-    overflow-x: hidden;
-    background: linear-gradient(135deg, #f0f8ff, #a7d8f7); /* Soft gradient background */
-    animation: backgroundMove 15s ease-in-out infinite; /* Continuous background animation */
+    background: linear-gradient(135deg, #f0f8ff, #a7d8f7);
+    color: #2c3e50;
 }
 
 /* Header */
@@ -19,15 +16,16 @@ header {
     color: white;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 10;
+    
 }
 
 /* Logo */
 header .logo {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -73,104 +71,84 @@ main {
     margin: 20px auto;
     max-width: 600px;
 }
-
-.form-section {
-    background: white;
+/* Main Section */
+main {
     padding: 20px;
-    margin: 20px 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
 }
 
-h2 {
-    color: #004d40;
+h1 {
+    text-align: center;
+    color: #000000;
+}
+
+/* Form Styles */
+form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
     margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-top: 15px;
-    font-size: 16px;
-    color: #333;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="number"] {
-    width: 93%;
-    padding: 15px;
-    margin-top: 5px;
+input,
+select {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 18px;
+    outline: none;
 }
 
-.info-icon {
-    font-size: 14px;
-    color: #004d40;
-    cursor: pointer;
-    position: relative;
+input:focus,
+select:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.5);
 }
 
-.info-icon:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: -25px;
-    left: 0;
-    background: #004d40;
+.radio-options {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.center-button {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 10vh; /* Ensures the container takes full height */
+}
+
+button {
+    background-color: #4caf50;
     color: white;
-    font-size: 12px;
-    padding: 5px;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-    white-space: nowrap;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
     margin: auto;
 }
 
-#parents-extra-details label,
-#parents-extra-details input {
-    display: block;
-    margin-bottom: 4px;
+button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
 }
 
-/* CSS for Yes/No radio buttons inside boxes */
-.metro-city .checkbox-group {
-    display: flex;
-    gap: 5px;
-    align-items: auto;
-}
-
-.metro-city .checkbox-box {
-    display: flex;
-    gap: 10px;
-    padding: 10px 20px;
-    border: 2px solid transparent;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s;
-    background-color: #f0f0f0; /* Default background for unselected */
-    color: black; /* Default text color */
-}
-
-.metro-city input[type="radio"] {
-    margin-right: 5px;
-}
-
-.metro-city input[type="radio"]:checked + label {
-    font-weight: bold;
-    color: rgb(0, 0, 0);
-}
-
-.metro-city .checkbox-box:hover {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
-}
-
-.metro-city label {
-    display: flex;
-    margin-left: 35px;
+/* Hidden Sections */
+.hidden {
+    display: none;
 }
 
 /* Yes/No options inside the form */
@@ -314,6 +292,19 @@ input[type="radio"]:checked + label {
     margin-top: 5px;
 }
 
+/* General Styles */
+html, body {
+    height: 100%; /* Ensures full height for the page */
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Allows for vertical stacking of content */
+}
+
+/* Main content */
+main {
+    flex: 1; /* Takes up available space, pushing the footer down */
+}
+
 /* Footer */
 footer {
     background-color: rgba(0, 150, 136, 0.8);
@@ -322,7 +313,6 @@ footer {
     padding: 15px;
     position: relative;
     backdrop-filter: blur(10px);
-    margin-top: auto;
 }
 
 footer::before {
@@ -339,28 +329,6 @@ footer::before {
     z-index: -1;
 }
 
-.center-button-container {
-    display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-    height: 10vh; /* Ensures the container takes full height */
-}
-
-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-    background-color: #388e3c;
-    transform: scale(1.05);
-}
 
 
 
@@ -370,64 +338,48 @@ button:hover {
 
 
 
-
-
-
-
-
-
-
-
-
-.summary-box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 600px;
-}
-
-.tax-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.statement {
+/* The Result Display Box */
+/* Styling for the response section */
+.response-section {
+    text-align: center;
     margin-top: 20px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-left: 4px solid #4caf50;
-    font-style: italic;
 }
 
-.result {
-    display: block;
+/* Styling for the response box */
+.response-box {
+    background: #ffffff; /* White background */
+    padding: 20px 25px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    max-width: 500px;
+    margin: 0 auto; /* Center the box */
+}
+
+/* Styling for individual response items */
+.response-item {
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #2c3e50; /* Text color for labels */
+}
+
+.response-item strong {
+    display: inline-block;
+    min-width: 150px; /* Aligns labels consistently */
+    color: #34495e; /* Stronger color for labels */
     font-weight: bold;
-    margin-bottom: 5px;
 }
 
-#Taxsummary {
-    text-align: center; /* Horizontally centers the text */
-    margin: 0 auto;
-    margin-top: 10px;
+.response-item span {
+    color: #555555; /* Slightly lighter color for values */
+}
+
+/* Highlight the Total Payable field */
+.response-item.total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e74c3c; /* Red color for total payable */
+    border-top: 1px solid #ddd; /* Add a separator line above total */
     padding-top: 10px;
+    margin-top: 10px;
 }
-
-.center-button {
-    margin-bottom: 10px;
-    display: flex;            /* Use flexbox for centering */
-    justify-content: center;  /* Horizontally center the button */
-    align-items: center;      /* Vertically center the button (if needed) */
-    height: 100%;             /* Optional: Ensure the div takes full height for vertical centering */
-}
-
-
-
-
-.taxresult {
-    display: none;
-}
-

@@ -25,9 +25,9 @@
 
     
     <section class="main-container">
-        <div class="section" id="income-tax">Income Tax</div>
-        <div class="section" id="property-tax" onclick="redirectTo('property-tax.html')">Property Tax</div>
-        <div class="section" id="vehicle-tax" onclick="redirectTo('vehicle-tax.html')">Vehicle Tax</div>
+        <div class="section" id="income-tax" onclick="redirectTo('income.html')"><p> Income Tax </p> </div>
+        <div class="section" id="property-tax" onclick="redirectTo('property.html')"><p>Property Tax</p></div>
+        <div class="section" id="vehicle-tax" onclick="redirectTo('vehicle.html')"><p>Vehicle Tax </p></div>
     </section>
 
     <script>
@@ -40,6 +40,12 @@
         incometax.addEventListener("click",()=>{
             window.location.href = "/form/income"
         })
+
+        let propertytax = document.getElementById("property-tax");
+        propertytax.addEventListener("click",()=>{
+            window.location.href = "/form/property"
+        })
+
     </script>
 
 

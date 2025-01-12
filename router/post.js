@@ -9,7 +9,6 @@ router.post("/income", async (req, res) => {
   const d = new Date();
   const year = d.getFullYear();
   const persondata = await req.body;
-  console.log(persondata);
   const person = {}; // object
   person.stdold = 50000;
 

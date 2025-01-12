@@ -19,7 +19,7 @@
     </header>
 
     <main class="contact-container">
-        <h1>Contact Us</h1>
+        <h1 id="contacts">Contact Us</h1>
         <p>If you have any questions or need assistance, feel free to reach out to us.</p>
         
         <div class="contact-details">
@@ -35,5 +35,11 @@
         <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        let contact = document.getElementById("contacts");
+        contact.addEventListener("click",()=>{
+            window.location.href = "/contacts"
+        })
+    </script>
 </body>
 </html>
