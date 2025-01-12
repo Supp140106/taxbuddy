@@ -1,65 +1,56 @@
-// Function to create a star at the mouse position
-function createStar(x, y) {
-    const star = document.createElement('div');
-    star.classList.add('star');
-    document.body.appendChild(star);
+async function postFormData(url, data) {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      credentials: "include", // Ensures cookies are included in the request
+    });
 
-    // Set the initial position of the star
-    star.style.left = `${x - 2}px`; // Smaller center to reduce overlap
-    star.style.top = `${y - 2}px`;  // Smaller center to reduce overlap
-
-    // Remove the star after the animation is complete (0.6s)
-    setTimeout(() => {
-        star.remove();
-    }, 600); // Shorter duration to remove stars faster
-}
-
-// Listen to mousemove event
-document.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-
-    // Create multiple stars per mousemove for a continuous trail
-    createStar(mouseX, mouseY);
-    // Optional: You can create more stars rapidly by calling the function multiple times
-    setTimeout(() => {
-        createStar(mouseX, mouseY);
-    }, 50);  // Slightly offset to create even denser trail effect
-});
-
-// Function to scroll to the bottom of the page
-function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight);
-}
-
-// Event listener to detect window resize
-window.addEventListener('resize', function() {
-    // Check if the window width is less than 768px (or any size you prefer)
-    if (window.innerWidth <= 768) {
-        scrollToBottom(); // Automatically scroll to the bottom
+    // Check if the response is a redirect
+    if (response.redirected) {
+      // Manually redirect the browser
+      window.location.href = response.url;
+      return;
     }
-});
 
-// Smooth Scroll on Mouse Wheel
-let scrollTimeout;
-
-function smoothScrollHandler(event) {
-    event.preventDefault(); // Prevent default scroll behavior
-
-    // Determine scroll direction
-    if (event.deltaY > 0) {
-        window.scrollBy({ top: window.innerHeight, behavior: "smooth" }); // Scroll down
-    } else {
-        window.scrollBy({ top: -window.innerHeight, behavior: "smooth" }); // Scroll up
-    }
+    // Parse the JSON response if not redirected
+    const jsonResponse = await response.json();
+    return jsonResponse;
+  } catch (error) {
+    console.error("Failed to fetch data:", error);
+    throw error;
+  }
 }
 
-// Attach the smooth scroll effect to mouse wheel event
-window.addEventListener("wheel", smoothScrollHandler);
 
 
-let getstarted = document.getElementById('getstarted');
+document.getElementById("submit").addEventListener("click", function (e) {
+  e.preventDefault(); // Prevent default form submission
 
-getstarted.addEventListener("click",()=>{
-    window.location.href = "land2.html"
-})
+  // Get the form data
+  const fullname = document.getElementById("fullname").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // Validate the form inputs (optional but recommended)
+  if (!fullname || !email || !mobile || !password) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  // Create the data object to send to the backend
+  const signupData = {
+    fullname: fullname,
+    email: email,
+    phonenumber: mobile,
+    password: password,
+  };
+
+  postFormData("/auth/signup",signupData)
+  // Send the data to the server via Fetch API
+
+});

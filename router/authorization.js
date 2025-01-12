@@ -35,13 +35,16 @@ router.post("/signup", async (req, res) => {
         });
 
         let token = jwt.sign({
-            name : fullname,
-            email : email,
-            mobile : phonenumber,
-            role : "user"
-        },process.env.secretkey,{expiresIn : '2h'});
+            name: fullname,
+            email: email,
+            mobile: phonenumber,
+        }, process.env.secretkey, { expiresIn: '2h' });
 
-        return res.status(201).header("token",token).json({ msg: "Signup successful" });
+        // Set token in a secure, httpOnly cookie and redirect to "getstarted"
+        res.status(201)
+           .cookie("token", token, { httpOnly: true, secure: true, sameSite: "strict" })
+           .redirect("/getstarted");
+
     } catch (error) {
         console.error("Error during signup:", error);
         return res.status(500).json({ msg: "Internal server error" });
@@ -50,7 +53,9 @@ router.post("/signup", async (req, res) => {
 
 
 
-router.put("/login", async (req, res) => {
+
+
+router.post("/login", async (req, res) => {
     try {
         const { emailormobile, password } = req.body;
 
@@ -59,7 +64,6 @@ router.put("/login", async (req, res) => {
         }
 
         let query;
-        
         if (emailormobile.indexOf('@') === -1) {
             query = { mobile: emailormobile };
         } else {
@@ -77,27 +81,29 @@ router.put("/login", async (req, res) => {
             return res.status(401).json({ msg: "Invalid password" });
         }
 
-        let token = jwt.sign({
-            name : checkuser.name,
-            email : checkuser.email,
-            mobile : checkuser.mobile,
-            role : "user"
-        },process.env.secretkey,{expiresIn : '2h'});
-        
-        // Respond with user data if authentication succeeds
-        res.header("token",token).json({
-            name : checkuser.name,
-            email : checkuser.email,
-            mobile : checkuser.mobile
-        });
+        // Generate a token or handle further logic if needed.
+        const userResponse = {
+            name: checkuser.name,
+            email: checkuser.email,
+            mobile: checkuser.mobile
+        };
+
+        let token = jwt.sign(userResponse,process.env.secretkey,{expiresIn : '2h'});
+
+        // Respond with JSON data or redirect, but not both.
+        // return res.header("token",token);
+        // OR, if you want to redirect:
+        res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "strict" }).redirect("/getstarted");
+
     } catch (error) {
         console.error("Error during login:", error);
-        res.status(500).json({ msg: "Internal server error" });
+        return res.status(500).json({ msg: "Internal server error" });
     }
 });
 
-module.exports = router;
-
-
 
 module.exports = router;
+
+
+
+
