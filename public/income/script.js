@@ -160,11 +160,12 @@ document
         mainForm.style.display = "none"; // Hide the main form
         // Show only the Personal Details section
         // document.getElementById("personal-details").style.display = "block";
-
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         const loadingWrapper = document.querySelector('.loading-wrapper');
         if (loadingWrapper) {
             loadingWrapper.style.display = 'flex'; // Show the loading wrapper
         }
+
 
         const personData = await getData();
         console.log(personData);

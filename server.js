@@ -26,6 +26,11 @@ app.use("/form",form);
 app.use("/",express.static("./public/home"))
 app.use("/",get);
 
+
+
+app.all("*",(req,res)=>{
+  res.redirect("/404")
+})
 //connection mongo db
 mongoose
   .connect(process.env.MONGOID)

@@ -1,132 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Property Tax Calculator</title>
-    <link rel="stylesheet" href="property.css">
-</head>
-<body>
+    <link rel="stylesheet" href="property.css" />
+  </head>
+  <body>
     <header>
-        <div class="logo">Property Tax Calculator</div>
-        <nav>
-            <ul>
-                <li><a href="land2.html">Back</a></li>
-                <li><a href="landing.html">Home</a></li>
-            </ul>
-        </nav>
+      <div class="logo">Property Tax Calculator</div>
+      <nav>
+        <ul>
+          <li><a href="/getstarted">Back</a></li>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </nav>
     </header>
 
     <main id="mainform">
-        <section class="calculator">
-            <h1>Calculate Your Property Tax</h1>
-            <form id="tax-form">
-                <div class="form-group">
-                    <label for="transaction-type">What are you doing?</label>
-                    <div class="radio-options">
-                        <input type="radio" id="buying" name="transactionType" value="buying" />
-                        <label for="buying" class="box-option">Buying Property</label>
-                        <input type="radio" id="selling" name="transactionType" value="selling" />
-                        <label for="selling" class="box-option">Selling Property</label>
-                    </div>
-                </div>
-                 
+      <section class="calculator">
+        <h1>Calculate Your Property Tax</h1>
+        <form id="tax-form">
+          <div class="form-group">
+            <label for="transaction-type">What are you doing?</label>
+            <div class="radio-options">
+              <input
+                type="radio"
+                id="buying"
+                name="transactionType"
+                value="buying"
+              />
+              <label for="buying" class="box-option">Buying Property</label>
+              <input
+                type="radio"
+                id="selling"
+                name="transactionType"
+                value="selling"
+              />
+              <label for="selling" class="box-option">Selling Property</label>
+            </div>
+          </div>
 
-                <div id="buying-options" class="hidden">
-                    <div class="form-group">
-                        <label for="property-value">Property Value (₹):</label>
-                        <input type="number" id="property-value" placeholder="Enter property value" />
-                    </div>
+          <div id="buying-options" class="hidden">
+            <div class="form-group">
+              <label for="property-value">Property Value (₹):</label>
+              <input
+                type="number"
+                id="property-value"
+                placeholder="Enter property value"
+              />
+            </div>
 
-                    <div class="form-group">
-                        <label>Is the property under construction?</label>
-                        <div class="radio-options">
-                            <input type="radio" id="construction-yes" name="underConstruction" value="yes" />
-                            <label for="construction-yes" class="yes-no-box">Yes</label>
-                            <input type="radio" id="construction-no" name="underConstruction" value="no" />
-                            <label for="construction-no" class="yes-no-box">No</label>
-                        </div>
-                    </div>
+            <div class="form-group">
+              <label>Is the property under construction?</label>
+              <div class="radio-options">
+                <input
+                  type="radio"
+                  id="construction-yes"
+                  name="underConstruction"
+                  value="yes"
+                />
+                <label for="construction-yes" class="yes-no-box">Yes</label>
+                <input
+                  type="radio"
+                  id="construction-no"
+                  name="underConstruction"
+                  value="no"
+                />
+                <label for="construction-no" class="yes-no-box">No</label>
+              </div>
+            </div>
 
-                    <div class="form-group">
-                        <label for="property-type">Type of Property:</label>
-                        <select id="property-type">
-                            <option value="residential">Residential</option>
-                            <option value="affordable">Affordable</option>
-                            <option value="commercial">Commercial</option>
-                            <option value="land">Land</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="form-group">
+              <label for="state-type">State:</label>
+              <select id="state-type">
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+              </select>
+            </div>
 
-                <div id="selling-options" class="hidden">
-                    <div class="form-group">
-                        <label for="purchase-price">Purchase Price (₹):</label>
-                        <input type="number" id="purchase-price" placeholder="Enter purchase price" />
-                    </div>
+            <div class="form-group">
+              <label for="property-type">Type of Property:</label>
+              <select id="property-type">
+                <option value="residential">Residential</option>
+                <option value="affordable">Affordable</option>
+                <option value="commercial">Commercial</option>
+                <option value="land">Land</option>
+              </select>
+            </div>
+          </div>
 
-                    <div class="form-group">
-                        <label for="improvement-cost">Improvement Cost (₹):</label>
-                        <input type="number" id="improvement-cost" placeholder="Enter improvement cost" />
-                    </div>
+          <div id="selling-options" class="hidden">
+            <div class="form-group">
+              <label for="purchase-price">Purchase Price (₹):</label>
+              <input
+                type="number"
+                id="purchase-price"
+                placeholder="Enter purchase price"
+              />
+            </div>
 
-                    <div class="form-group">
-                        <label for="selling-price">Selling price (₹):</label>
-                        <input type="number" id="selling-price" placeholder="Enter Selling Price" />
-                    </div>
+            <div class="form-group">
+              <label for="improvement-cost">Improvement Cost (₹):</label>
+              <input
+                type="number"
+                id="improvement-cost"
+                placeholder="Enter improvement cost"
+              />
+            </div>
 
-                    <div class="form-group">
-                        <label for="purchase-date">When did you buy the property?</label>
-                        <input type="date" id="purchase-date" />
-                    </div>
-                </div>
+            <div class="form-group">
+              <label for="selling-price">Selling price (₹):</label>
+              <input
+                type="number"
+                id="selling-price"
+                placeholder="Enter Selling Price"
+              />
+            </div>
 
-               
-                <div class="center-button">
-                    <button type="button" id="calculate-tax">Calculate Tax</button>
-                </div>
-            </form>
-        </section>
+            <div class="form-group">
+              <label for="purchase-date">When did you buy the property?</label>
+              <input type="date" id="purchase-date" />
+            </div>
+          </div>
+
+          <div class="center-button">
+            <button type="button" id="calculate-tax">Calculate Tax</button>
+          </div>
+        </form>
+      </section>
     </main>
 
-
-
-
-
-
-    <section class="response-section" style="display:none;">
-        <h1>Server Response Details</h1>
-        <div class="response-box">
-            <div class="response-item">
-                <strong>AI Answer:</strong><span id="ai-answer"></span>
-            </div>
-            <div class="response-item">
-                <strong>Statement:</strong><span id="statement"></span>
-            </div>
-            <div class="response-item">
-                <strong>Stamp Duty (₹):</strong><span id="stamp-duty"></span>
-            </div>
-            <div class="response-item">
-                <strong>Registration (₹):</strong><span id="registration"></span>
-            </div>
-            <div class="response-item">
-                <strong>GST (₹):</strong><span id="gst"></span>
-            </div>
-            <div class="response-item">
-                <strong>TDS (₹):</strong><span id="tds"></span>
-            </div>
-            <div class="response-item total">
-                <strong>Total Payable (₹):</strong><span id="total-payable"></span>
-            </div>
-        </div>
-    </section>
-
-
+    
 
     <footer>
-        <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
+      <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
     <script src="property.js"></script>
-</body>
+  </body>
 </html>

@@ -1,65 +1,49 @@
-// Function to create a star at the mouse position
-function createStar(x, y) {
-    const star = document.createElement('div');
-    star.classList.add('star');
-    document.body.appendChild(star);
+const submit = document.getElementById("login"); // Make sure the ID matches your HTML
 
-    // Set the initial position of the star
-    star.style.left = `${x - 2}px`; // Smaller center to reduce overlap
-    star.style.top = `${y - 2}px`;  // Smaller center to reduce overlap
 
-    // Remove the star after the animation is complete (0.6s)
-    setTimeout(() => {
-        star.remove();
-    }, 600); // Shorter duration to remove stars faster
-}
-
-// Listen to mousemove event
-document.addEventListener('mousemove', (e) => {
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-
-    // Create multiple stars per mousemove for a continuous trail
-    createStar(mouseX, mouseY);
-    // Optional: You can create more stars rapidly by calling the function multiple times
-    setTimeout(() => {
-        createStar(mouseX, mouseY);
-    }, 50);  // Slightly offset to create even denser trail effect
-});
-
-// Function to scroll to the bottom of the page
-function scrollToBottom() {
-    window.scrollTo(0, document.body.scrollHeight);
-}
-
-// Event listener to detect window resize
-window.addEventListener('resize', function() {
-    // Check if the window width is less than 768px (or any size you prefer)
-    if (window.innerWidth <= 768) {
-        scrollToBottom(); // Automatically scroll to the bottom
+async function postFormData(url, data) {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      // Check if the response is ok (status 200-299)
+      if (!response.ok) {
+        const errorDetails = await response.text(); // Log error details
+        throw new Error(`Network response was not ok: ${errorDetails}`);
+      }
+  
+      // Parse the JSON response
+      const jsonResponse = await response.json();
+      return jsonResponse;
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+      throw error;
     }
+  }
+
+submit.addEventListener("click", async (e) => {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // Check if both fields are filled
+  if (email === "" || password === "") {
+    // Prevent form submission
+    e.preventDefault(); // Use the correct event object name
+    alert("Please fill in both email and password.");
+  } else {
+    // Create an object with the email and password
+    const loginData = {
+      emailormobile: email,
+      password: password,
+    };
+
+    
+
+
+  }
 });
-
-// Smooth Scroll on Mouse Wheel
-let scrollTimeout;
-
-function smoothScrollHandler(event) {
-    event.preventDefault(); // Prevent default scroll behavior
-
-    // Determine scroll direction
-    if (event.deltaY > 0) {
-        window.scrollBy({ top: window.innerHeight, behavior: "smooth" }); // Scroll down
-    } else {
-        window.scrollBy({ top: -window.innerHeight, behavior: "smooth" }); // Scroll up
-    }
-}
-
-// Attach the smooth scroll effect to mouse wheel event
-window.addEventListener("wheel", smoothScrollHandler);
-
-
-let getstarted = document.getElementById('getstarted');
-
-getstarted.addEventListener("click",()=>{
-    window.location.href = "/getstarted"
-})

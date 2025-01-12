@@ -189,7 +189,7 @@ router.post("/income", async (req, res) => {
       person.eeoreea +
       person.disability +
       person.NPS);
-  let promt = `As an experienced and approachable tax advisor specializing in Indian tax law, provide clear and actionable tax advice. Limit your response to 100 words, focusing on practical tax-saving strategies, deductions, credits, and important deadlines. Prioritize the most beneficial and relevant strategies for the individual’s financial situation, while highlighting any key changes in Indian tax law that could affect their filings. Avoid technical jargon and explain concepts in a simple, friendly manner suitable for all taxpayers. Include a reminder to seek personalized advice from a professional for the best results.
+  let promt = `As an experienced and approachable tax advisor specializing in Indian tax law, provide clear and actionable tax advice. Limit your response to 200 words, focusing on practical tax-saving strategies, deductions, credits, and important deadlines. Prioritize the most beneficial and relevant strategies for the individual’s financial situation, while highlighting any key changes in Indian tax law that could affect their filings. Avoid technical jargon and explain concepts in a simple, friendly manner suitable for all taxpayers. Include a reminder to seek personalized advice from a professional for the best results.
 
 The user data is as follows:
 

@@ -1,0 +1,83 @@
+/* CSS (404.css) */
+
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f8ff;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #f0f8ff, #ffcccb);
+    animation: backgroundMove 10s ease-in-out infinite;
+    overflow: hidden;
+}
+
+/* Error Container */
+.error-container {
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.error-title {
+    font-size: 10rem;
+    font-weight: bold;
+    color: #ff6f61;
+    animation: bounce 1.5s infinite;
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: #333;
+}
+
+.back-home {
+    background-color: #009688;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.back-home:hover {
+    background-color: #00796b;
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes backgroundMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 0%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}

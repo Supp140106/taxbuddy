@@ -51,9 +51,12 @@ document
           throw new Error("Required fields missing for buying property");
         }
 
+        const state = document.getElementById("state-type")?.value;
+
         formData = {
           propertycost: parseFloat(propertyValue) || 0,
           type: propertyType,
+          state : state,
           underconstruction: underConstruction === "yes", // Convert to boolean
         };
 
@@ -64,29 +67,8 @@ document
         const answer = await postFormData("/property/house/buying", formData);
         console.log(answer);
         // Access the entire response-section
-        let responseSection = document.querySelector('.response-section');
-        
 
-        // Access individual elements by their IDs
-        let aiAnswer = document.getElementById("ai-answer");
-        let statement = document.getElementById("statement");
-        let stampDuty = document.getElementById("stamp-duty");
-        let registration = document.getElementById("registration");
-        let gst = document.getElementById("gst");
-        let tds = document.getElementById("tds");
-        let totalPayable = document.getElementById("total-payable");
-
-
-
-        // Update the content of the elements with the values from the response
-        aiAnswer.textContent = answer.aianswer;
-        statement.textContent = answer.statement;
-        stampDuty.textContent = answer.stampduty;
-        registration.textContent = answer.registration;
-        gst.textContent = answer.GST;
-        tds.textContent = answer.TDS;
-        totalPayable.textContent = answer.totalPayable;
-        responseSection.style.display = 'block';
+    
 
 
         
