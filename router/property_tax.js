@@ -26,7 +26,7 @@ router.post("/house/buying", async (req, res) => {
   if (
     typeof propertycost !== "number" ||
     propertycost <= 0 ||
-    !["residential", "affordable", "commercial"].includes(type) ||
+    !["residential", "affordable", "commercial","land"].includes(type) ||
     typeof underconstruction !== "boolean"
   ) {
     return res.status(400).json({
@@ -39,7 +39,7 @@ router.post("/house/buying", async (req, res) => {
 
 
   // Calculations
-  let stampduty = propertycost * getStampDutyPercentages(state); // Stamp duty at 5.5%
+  let stampduty = propertycost * (getStampDutyPercentages(state)/100); // Stamp duty at 5.5%
   let registration = propertycost * 0.01; // Registration at 1%
   let GST = 0;
 
@@ -47,6 +47,7 @@ router.post("/house/buying", async (req, res) => {
     if (type === "residential") GST = propertycost * 0.05;
     if (type === "affordable") GST = propertycost * 0.01;
     if (type === "commercial") GST = propertycost * 0.12;
+    if (type ==="land") GST = 0;
   }
 
   let TDS = 0;
@@ -93,109 +94,85 @@ router.post("/house/buying", async (req, res) => {
 
 
 
-
-
-
-
-
-function calculateCII(
-  purchase,
-  sale,
-  improvement,
-  ciisaleYear,
-  ciipurchaseYear
-) {
-  const indexedPurchase = (ciisaleYear / ciipurchaseYear) * purchase;
-  const capitalGainsTax = 0.2 * (sale - (indexedPurchase + improvement));
+// Helper function to calculate CII-based capital gains tax
+const calculateCii = (purchasePrice, salePrice, improvementCost, ciiSaleYear, ciiPurchaseYear) => {
+  const indexed = (ciiSaleYear / ciiPurchaseYear) * purchasePrice;
+  const capitalGainsTax = 0.2 * (salePrice - (indexed + improvementCost));
   return capitalGainsTax;
-}
+};
 
-router.post("/house/selling", async (req, res) => {
-  const { purchasePrice, salePrice, improvementCost, purchaseDate } = req.body;
+// Endpoint to calculate tax
+router.post('/house/selling', (req, res) => {
+  const { purchaseDate, purchasePrice, salePrice, improvementCost } = req.body;
 
-  // Input validation
-  if (
-    typeof purchasePrice !== "number" ||
-    typeof salePrice !== "number" ||
-    typeof improvementCost !== "number" ||
-    !purchaseDate
-  ) {
-    return res.status(400).json({
-      error:
-        "Invalid input. Ensure purchasePrice, salePrice, improvementCost are numbers and purchaseDate is provided in 'yyyy-MM-dd' format.",
-    });
+  if (!purchaseDate || !purchasePrice || !salePrice || !improvementCost) {
+      return res.status(400).json({ error: 'Please provide purchaseDate, purchasePrice, salePrice, and improvementCost.' });
   }
 
   const currentDate = new Date();
   const purchaseDateObj = new Date(purchaseDate);
-  const yearsDifference =
-    currentDate.getFullYear() - purchaseDateObj.getFullYear();
 
-  let tax = 0;
-  let taxType = "";
-
-  if (yearsDifference < 2) {
-    // Short-term capital gains tax
-    tax = 0.3 * (salePrice - (improvementCost + purchasePrice));
-    taxType = "Short-Term Capital Gains Tax";
-  } else {
-    // Long-term capital gains tax with CII
-    const ciiValues = {
-      2023: { saleYear: 363, purchaseYear: 340 },
-      2022: { saleYear: 363, purchaseYear: 324 },
-      2021: { saleYear: 363, purchaseYear: 309 },
-      2020: { saleYear: 363, purchaseYear: 295 },
-      2019: { saleYear: 363, purchaseYear: 285 },
-    };
-
-    const purchaseYear = purchaseDateObj.getFullYear();
-    if (ciiValues[purchaseYear]) {
-      const { saleYear, purchaseYear: ciiPurchaseYear } =
-        ciiValues[purchaseYear];
-      tax = calculateCII(
-        purchasePrice,
-        salePrice,
-        improvementCost,
-        saleYear,
-        ciiPurchaseYear
-      );
-    } else {
-      return res.status(400).json({
-        error: "CII values are not available for the provided purchase year.",
-      });
-    }
-
-    taxType = "Long-Term Capital Gains Tax";
+  if (isNaN(purchaseDateObj)) {
+      return res.status(400).json({ error: 'Invalid purchase date format. Use YYYY-MM-DD.' });
   }
 
-  let prompt = `Suppose You are a professional Tax Adviser .Analyze the following JavaScript data object and provide professional and easy-to-understand advice for the buyer regarding tax obligations and potential optimizations:
+  const purchaseYear = purchaseDateObj.getFullYear();
 
-javascript
-Copy code
-{
-    taxType: "${taxType}",
-    capitalGainsTax: ${tax.toFixed(2)},
-    message: "${taxType === 'Long-Term Capital Gains Tax' 
-      ? 'By optimizing this data, we calculated your tax with indexation (CII). Without indexation, you would pay an extra tax.' 
-      : 'Short-term capital gains tax applied based on the provided details.'}"
-}
-Based on this data, explain what the tax type (Long-Term or Short-Term Capital Gains Tax) means for the buyer, how capital gains tax is calculated,
- and how indexation benefits long-term capital gains. Provide actionable advice on tax optimization strategies
-  specific to their tax type. For example, suggest investment options, exemptions, or planning techniques that
-   can minimize the tax burden within the regulatory framework. Avoid suggesting consultation with a professional; 
-   focus on empowering the buyer with practical steps they can implement on their own.Write it in 100 words pointwise.`
+  // Calculate the difference in years between the current date and purchase date
+  const yearsDifference = currentDate.getFullYear() - purchaseYear;
 
+  // Calculate the date two years ahead of the purchase date
+  const twoYearsAhead = new Date(purchaseDateObj);
+  twoYearsAhead.setFullYear(purchaseDateObj.getFullYear() + 2);
 
-  console.log((await run(prompt)).response.text());
-  res.status(200).json({
-    taxType: taxType,
-    capitalGainsTax: tax.toFixed(2),
-    message:
-      taxType === "Long-Term Capital Gains Tax"
-        ? "By optimizing this data, we calculated your tax with indexation (CII). Without indexation, you would pay an extra tax."
-        : "Short-term capital gains tax applied based on the provided details.",
-  });
+  const remainingDays = Math.ceil((twoYearsAhead - currentDate) / (1000 * 60 * 60 * 24));
+
+  // Determine the type of capital gains tax
+  if (yearsDifference < 2) {
+      const shortTermSavings = 0.1 * purchasePrice;
+      const shortCapitalGainsTax = 0.3 * (salePrice - (improvementCost + purchasePrice));
+      return res.json({
+          message: `If you sell the property on ${twoYearsAhead.toISOString().split('T')[0]}, you will save an amount of $${shortTermSavings.toFixed(2)} (10% of the purchase price).`,
+          shortCapitalGainsTax: shortCapitalGainsTax.toFixed(2),
+      });
+  } else {
+      let ciiPurchaseYear;
+      const ciiSaleYear = 363; // Fixed CII value for sale year
+
+      // Determine CII purchase year based on the purchase year
+      switch (purchaseYear) {
+          case 2023:
+              ciiPurchaseYear = 340;
+              break;
+          case 2022:
+              ciiPurchaseYear = 324;
+              break;
+          case 2021:
+              ciiPurchaseYear = 309;
+              break;
+          case 2020:
+              ciiPurchaseYear = 295;
+              break;
+          case 2019:
+              ciiPurchaseYear = 285;
+              break;
+          default:
+              return res.status(400).json({ error: 'CII data is not available for the given purchase year.' });
+      }
+
+      const longCapitalGainsTax = calculateCii(purchasePrice, salePrice, improvementCost, ciiSaleYear, ciiPurchaseYear);
+      return res.json({
+          message: 'Long-term capital gains tax has been calculated using indexation (CII values).',
+          longCapitalGainsTax: longCapitalGainsTax.toFixed(2),
+      });
+  }
 });
+
+
+
+
+
+
 
 const stateTaxRates = {
   Karnataka: {

@@ -1,11 +1,14 @@
 require("dotenv").config(); // using .env file
 const express = require("express");
 const mongoose = require("mongoose");
+const nodemailer = require('nodemailer');
 const get = require("./router/get");
 const post = require("./router/post");
 const form = require("./router/form")
+const otp = require("./router/otp")
 const authorization = require("./router/authorization");
 const property = require('./router/property_tax')
+
 const PORT = process.env.PORT|| 3000;
 const app = express();
 
@@ -22,6 +25,7 @@ app.use("/submit", post);
 app.use("/auth", authorization); // This is for Sign up and Sign in
 app.use("/property",property);
 app.use("/form",form);
+app.use("/otp",otp);
 
 app.use("/",express.static("./public/home"))
 app.use("/",get);

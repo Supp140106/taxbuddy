@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Login</title>
@@ -20,14 +21,20 @@
 
     <!-- User Details -->
     <section class="user-details">
-        <h2 style="text-align: center;margin-top: 30px;">Welcome User</h2>
+        <h2>Welcome User</h2>
     </section>
 
     
     <section class="main-container">
-        <div class="section" id="income-tax" onclick="redirectTo('income.html')"><p> Income Tax </p> </div>
-        <div class="section" id="property-tax" onclick="redirectTo('property.html')"><p>Property Tax</p></div>
-        <div class="section" id="vehicle-tax" onclick="redirectTo('vehicle.html')"><p>Vehicle Tax </p></div>
+        <div class="section" id="property-tax" >
+            <p>Property Tax</p>
+        </div>
+        <div class="section" id="income-tax" >
+            <p>Income Tax</p>
+        </div>
+        <div class="section" id="vehicle-tax" >
+            <p>Vehicle Tax</p>
+        </div>
     </section>
 
     <script>
@@ -35,21 +42,58 @@
         function redirectTo(page) {
             window.location.href = page;
         }
-
-        let incometax = document.getElementById("income-tax");
-        incometax.addEventListener("click",()=>{
-            window.location.href = "/form/income"
-        })
-
-        let propertytax = document.getElementById("property-tax");
-        propertytax.addEventListener("click",()=>{
-            window.location.href = "/form/property"
-        })
-
     </script>
 
+<script>
+    document.querySelectorAll(".section").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            btn.style.setProperty("--mouse-x", `${x}%`);
+            btn.style.setProperty("--mouse-y", `${y}%`);
+        });
+    });
 
 
+    let property = document.getElementById("property-tax")
+    let income = document.getElementById("income-tax")
+    let vehicle = document.getElementById("vehicle-tax")
+
+    property.addEventListener("click",()=>{
+        window.location.href = "/form/property"
+    })
+
+    income.addEventListener("click",()=>{
+        window.location.href = "/form/income"
+    })
+
+</script>
+
+<script>
+    // Select all sections
+const sections = document.querySelectorAll('.section');
+
+sections.forEach((section) => {
+    section.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = section.getBoundingClientRect();
+        const x = e.clientX - left; // X position inside the element
+        const y = e.clientY - top;  // Y position inside the element
+
+        // Calculate rotation
+        const rotateX = ((y / height) - 0.5) * 30; // Adjust tilt sensitivity
+        const rotateY = ((x / width) - 0.5) * 30;
+
+        // Apply rotation
+        section.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    // Reset tilt when the mouse leaves
+    section.addEventListener('mouseleave', () => {
+        section.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+});
+</script>
 
 
 
@@ -58,8 +102,9 @@
 
     <footer>
         <div>
-            <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
+            <p>&copy; 2025 TaxBuddy.</p>
         </div>
     </footer>
 </body>
 </html>
+

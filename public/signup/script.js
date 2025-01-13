@@ -50,7 +50,8 @@ document.getElementById("submit").addEventListener("click", function (e) {
     password: password,
   };
 
-  postFormData("/auth/signup",signupData)
+  let a = postFormData("/auth/signup",signupData)
+  
   // Send the data to the server via Fetch API
 
 });

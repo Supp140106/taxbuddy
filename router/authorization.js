@@ -21,7 +21,7 @@ router.post("/signup", async (req, res) => {
         });
 
         if (existingUser) {
-            return res.status(400).json({ msg: "Credentials already used" });
+            return res.status(400).json({ message: "Credentials already used" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -47,7 +47,7 @@ router.post("/signup", async (req, res) => {
 
     } catch (error) {
         console.error("Error during signup:", error);
-        return res.status(500).json({ msg: "Internal server error" });
+        return res.status(500).json({ message: "Internal server error" });
     }
 });
 
