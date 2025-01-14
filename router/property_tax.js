@@ -18,6 +18,18 @@ function getStampDutyPercentages(stateName) {
  
 }
 
+function getStampdutysaving(stateName) {
+  const stateData = stampdata.find(item => item.state === stateName);
+
+  // Check if the state exists
+  if (!stateData) {
+      return `State "${stateName}" not found in the data.`;
+  }
+
+  // Return the percentages
+  return (stateData.male_stamp_duty_percentage-stateData.female_stamp_duty_percentage)/100;
+}
+
 router.post("/house/buying", async (req, res) => {
   // Destructure inputs from req.body
   const { propertycost, type, underconstruction, state } = req.body;
@@ -73,20 +85,23 @@ router.post("/house/buying", async (req, res) => {
     2
   )} for the legal transfer of ownership. For you, the total taxes levied on buying the property would be ₹${payable.toFixed(
     2
-  )}. ${tds_st} `;
+  )}.
+   ${tds_st} `;
 
-  let prompt = `${statement} make this in 100 words as profetional friendly expert tax advisor`;
+
+  let st = `If You register the propert in name of a Woman You have to give 1% less stampduty than the previous saving upto Rs ${(stampduty*getStampdutysaving(state)).toFixed(2)}`
+  let prompt = `${st} make this in 50 words as profetional friendly expert tax advisor`;
   // Response
   let aianswer = await run(prompt);
   
   res.status(200).json({
-    aianswer : aianswer.response.text(),
     statement: statement,
     stampduty: stampduty.toFixed(2),
     registration: registration.toFixed(2),
     GST: GST.toFixed(2),
     TDS: TDS.toFixed(2),
     totalPayable: payable.toFixed(2),
+    optimisation :  aianswer.response.text()
   });
 });
 
@@ -119,7 +134,7 @@ router.post('/house/selling', (req, res) => {
   const purchaseYear = purchaseDateObj.getFullYear();
 
   // Calculate the difference in years between the current date and purchase date
-  const yearsDifference = currentDate.getFullYear() - purchaseYear;
+  const yearsDifference = currentDate.getFullYear() - purchaseDateObj.getFullYear();
 
   // Calculate the date two years ahead of the purchase date
   const twoYearsAhead = new Date(purchaseDateObj);
@@ -128,8 +143,8 @@ router.post('/house/selling', (req, res) => {
   const remainingDays = Math.ceil((twoYearsAhead - currentDate) / (1000 * 60 * 60 * 24));
 
   // Determine the type of capital gains tax
-  if (yearsDifference < 2) {
-      const shortTermSavings = 0.1 * purchasePrice;
+  if (yearsDifference <= 2) {
+      const shortTermSavings = 0.1 * (salePrice - (improvementCost + purchasePrice));
       const shortCapitalGainsTax = 0.3 * (salePrice - (improvementCost + purchasePrice));
       return res.json({
           message: `If you sell the property on ${twoYearsAhead.toISOString().split('T')[0]}, you will save an amount of $${shortTermSavings.toFixed(2)} (10% of the purchase price).`,
@@ -141,24 +156,54 @@ router.post('/house/selling', (req, res) => {
 
       // Determine CII purchase year based on the purchase year
       switch (purchaseYear) {
-          case 2023:
-              ciiPurchaseYear = 340;
-              break;
-          case 2022:
-              ciiPurchaseYear = 324;
-              break;
-          case 2021:
-              ciiPurchaseYear = 309;
-              break;
-          case 2020:
-              ciiPurchaseYear = 295;
-              break;
-          case 2019:
-              ciiPurchaseYear = 285;
-              break;
+        case 2023:
+            ciiPurchaseYear = 340;
+            break;
+        case 2022:
+            ciiPurchaseYear = 324;
+            break;
+        case 2021:
+            ciiPurchaseYear = 309;
+            break;
+        case 2020:
+            ciiPurchaseYear = 295;
+            break;
+        case 2019:
+            ciiPurchaseYear = 289;
+            break;
+        case 2018:
+            ciiPurchaseYear = 280;
+            break;
+        case 2017:
+            ciiPurchaseYear = 272;
+            break;
+        case 2016:
+            ciiPurchaseYear = 264;
+            break;
+        case 2015:
+            ciiPurchaseYear = 254;
+            break;
+        case 2014:
+            ciiPurchaseYear = 240;
+            break;
+        case 2013:
+            ciiPurchaseYear = 220;
+            break;
+        case 2012:
+            ciiPurchaseYear = 200;
+            break;
+        case 2011:
+            ciiPurchaseYear = 184;
+            break;
+        case 2010:
+            ciiPurchaseYear = 167;
+            break;
           default:
-              return res.status(400).json({ error: 'CII data is not available for the given purchase year.' });
-      }
+              return res.status(400).json({ error: 'CII data is not available for the given purchase year.' }); // Default value for years outside the range
+    }
+    
+          
+      
 
       const longCapitalGainsTax = calculateCii(purchasePrice, salePrice, improvementCost, ciiSaleYear, ciiPurchaseYear);
       return res.json({

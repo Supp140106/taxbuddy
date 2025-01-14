@@ -203,9 +203,9 @@ New Tax Calculation for AY 2025-26: ${taxcal.income_taxcalcnew_ay2526(taxabinc)}
   
       let result = await run(promt);
   res.json({
-    old: taxcal.income_taxcalcold(taxable, person.age),
-    new24: taxcal.income_taxcalcnew_ay2425(taxabinc),
-    new25: taxcal.income_taxcalcnew_ay2526(taxabinc),
+    old: taxcal.income_taxcalcold(taxable, person.age).toFixed(2),
+    new24: taxcal.income_taxcalcnew_ay2425(taxabinc).toFixed(2),
+    new25: taxcal.income_taxcalcnew_ay2526(taxabinc).toFixed(2),
     statement : result.response.text()
   });
 });
