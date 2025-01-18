@@ -4,7 +4,7 @@
     <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Login</title>
+    <title>Get Started</title>
     <link rel="stylesheet" href="land2.css">
 </head>
 <body>
@@ -14,25 +14,29 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/login">Login</a></li>
+                <li id="login"><a href="/auth">Login</a></li>
+                <li id="account" style="display: none;"><a href="/account"><img class="profile-icon" src="profile.jpeg"></a></li>
             </ul>
         </nav>
     </header>
 
     <!-- User Details -->
     <section class="user-details">
-        <h2>Welcome User</h2>
+        <h2>Welcome <span id="nameofuser"></span></h2>
     </section>
 
     
     <section class="main-container">
         <div class="section" id="property-tax" >
+            <div><img src="20250114_234126.png" alt="Property Tax Icon"  id="png" class="icon"></div>
             <p>Property Tax</p>
         </div>
         <div class="section" id="income-tax" >
+            <div><img src="tax.png" alt="Vehicle Tax Icon" id="png1" class="icon"></div>
             <p>Income Tax</p>
         </div>
         <div class="section" id="vehicle-tax" >
+            <div><img src="car.png" alt="Vehicle Tax Icon" id="png" class="icon"></div>
             <p>Vehicle Tax</p>
         </div>
     </section>
@@ -54,20 +58,6 @@
             btn.style.setProperty("--mouse-y", `${y}%`);
         });
     });
-
-
-    let property = document.getElementById("property-tax")
-    let income = document.getElementById("income-tax")
-    let vehicle = document.getElementById("vehicle-tax")
-
-    property.addEventListener("click",()=>{
-        window.location.href = "/form/property"
-    })
-
-    income.addEventListener("click",()=>{
-        window.location.href = "/form/income"
-    })
-
 </script>
 
 <script>
@@ -93,13 +83,27 @@ sections.forEach((section) => {
         section.style.transform = 'rotateX(0deg) rotateY(0deg)';
     });
 });
+
+document.getElementById("property-tax").addEventListener("click",()=>{
+    window.location.href = "/form/property"
+})
+document.getElementById("income-tax").addEventListener("click",()=>{
+    window.location.href = "/form/income"
+})
+document.getElementById("vehicle-tax").addEventListener("click",()=>{
+    window.location.href = "/form/vehicle"
+})
 </script>
 
 
 
 
 
-
+<div class="tooltip" style="padding: 30px;">
+    <button class="fixed-button" onclick="window.open('/chat','_blank')"><img src="reva.png" height="70px" width="70px"></button>
+    <span class="tooltip-text">ReVa Ai</span>
+</div>
+<script src="script.js"></script>
     <footer>
         <div>
             <p>&copy; 2025 TaxBuddy.</p>

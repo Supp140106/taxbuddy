@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <title>Tax Bot</title>
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background: radial-gradient(
+          circle,
+          #1a1a2e,
+          #16213e,
+          hsl(296, 40%, 50%),
+          #0f3460,
+          #000
+        );
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .chat-container {
+        width: 60%;
+        height: 80%;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .chat-header {
+        background: radial-gradient(
+          circle,
+          #1a1a2e,
+          #16213e,
+          hsl(296, 40%, 50%),
+          #0f3460,
+          #000
+        );
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .chat-messages {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+      }
+      .message {
+        margin-bottom: 15px;
+        display: flex;
+      }
+      .message.user {
+        justify-content: flex-end;
+      }
+      .message.bot {
+        justify-content: flex-start;
+      }
+      .message.user .message-content {
+        background-color: #007bff;
+        color: #fff;
+      }
+      .message.bot .message-content {
+        background-color: #e9ecef;
+        color: #333;
+      }
+      .message-content {
+        padding: 10px 15px;
+        border-radius: 20px;
+        max-width: 70%;
+      }
+      .chat-input {
+        display: flex;
+        border-top: 1px solid #e9ecef;
+      }
+      .chat-input input {
+        flex: 1;
+        padding: 15px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+      }
+      .chat-input button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .chat-input button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Home Button Styling */
+      #homebutton {
+        text-decoration: none;
+        color: #fff;
+        background: #4ecca3;
+        padding: 10px 30px;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.8s ease, color 0.3s ease;
+        margin-left: 10px; /* Push button to the right */
+      }
+
+      #homebutton:hover {
+        background: #fff;
+        color: #4ecca3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">ReVA Ai</div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message bot">
+          <div class="message-content">Hello! How can I assist you today?</div>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Type a message..."
+          onkeypress="handleKeyPress(event)"
+        />
+        <button onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="tooltip" style="padding: 30px">
+      
+        <a href="/" id="homebutton">Back to Home</a>
+      
+      
+    </div>
+    <script>
+
+let memory = JSON.parse(localStorage.getItem('memory')) || { history: [] };
+
+async function sendMessage() {
+  const input = document.getElementById("chat-input");
+  const message = input.value.trim();
+
+  if (message) {
+    addMessage("user", message);
+    input.value = ""; // Clear input field after sending
+
+    try {
+      const botResult = await fetchdata("/bot/send", {
+        message: message,
+        prev: JSON.stringify(memory) // Send the memory to the backend
+      });
+
+      if (botResult && botResult.msg) {
+        addMessage("bot", botResult.msg);
+        console.log(botResult);
+
+        // Store message and bot response in memory
+        memory.history.push({ user: message, bot: botResult.msg });
+        
+        // Save the updated memory to localStorage
+        localStorage.setItem('memory', JSON.stringify(memory));
+      } else {
+        addMessage("bot", "Sorry, I couldn't process that. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error in sendMessage:", error);
+      addMessage("bot", "There was an error. Please try again later.");
+    }
+  }
+}
+
+function addMessage(sender, text) {
+  const chatMessages = document.getElementById("chat-messages");
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("message", sender);
+
+  const messageContent = document.createElement("div");
+  messageContent.classList.add("message-content");
+  messageContent.textContent = text;
+
+  messageElement.appendChild(messageContent);
+  chatMessages.appendChild(messageElement);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function fetchdata(url, data) {
+  try {
+    const response = await fetch(url, {
+      method: "POST", // Specify the HTTP method
+      headers: {
+        "Content-Type": "application/json", // Set the content type
+      },
+      body: JSON.stringify(data), // Convert data to JSON format for the request body
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const responseData = await response.json(); // Parse the JSON response
+    return responseData; // Handle the data
+  } catch (error) {
+    console.error("Error posting data:", error); // Handle errors
+    throw error; // Re-throw error to handle it in sendMessage
+  }
+}
+
+function handleKeyPress(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Prevent form submission if inside a form
+    sendMessage();
+  }
+}
+
+    </script>
+  </body>
+</html>

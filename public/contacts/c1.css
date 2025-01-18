@@ -1,0 +1,315 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background: #000;
+    overflow-x: hidden;
+}
+/* Adjust the spacing for the About Us section */
+.about {
+    margin-top: 10px; /* Adjust this value to decrease the gap */
+    padding-top: 5px; /* Optional: You can also adjust padding */
+}
+
+/* Ensure the About Us heading is close to the top */
+.about h1 {
+    margin-top: 0; /* Remove any top margin */
+    padding-top: 0; /* Remove any unnecessary padding */
+}
+/* Header Container */
+header .container {
+    display: flex;
+    justify-content: space-between; /* Space between logo and button */
+    align-items: center;
+    padding: 40px;
+    background: #05051500;
+    color: #fff;
+}
+
+/* Logo Styling */
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-right: auto; /* Ensure logo stays on the left */
+}
+
+/* Home Button Styling */
+header .home-button {
+    text-decoration: none;
+    color: #fff;
+    background: #4ecca3;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-left: auto; /* Push button to the right */
+}
+
+header .home-button:hover {
+    background: #fff;
+    color: #4ecca3;
+}
+
+
+/* Space-Themed Gradient Background */
+.space-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #1a1a2e, #16213e, #0f3460, #000);
+    z-index: -2;
+}
+
+/* Particle Animation */
+#particle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: float 8s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-10vh);
+    }
+}
+
+/* Content Styling */
+.content {
+    text-align: center;
+    padding: 50px;
+    z-index: 1;
+    position: relative;
+}
+
+.about h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: #00d4ff;
+    text-shadow: 0px 0px 20px #00d4ff;
+}
+
+.about p {
+    font-size: 1.3rem;
+    margin: 0 auto;
+    width: 60%;
+    line-height: 1.8;
+    color: #a5c9ff;
+    text-shadow: 0px 0px 10px #005377;
+}
+
+.team h2 {
+    font-size: 3rem;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #ff007f;
+    text-shadow: 0px 0px 20px #ff007f;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Reduce spacing between cards */
+    flex-wrap: wrap;
+}
+
+.team-member {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px; /* Reduce padding */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    width: 150px; /* Reduce card width */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-member:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+}
+
+.team-member img {
+    border-radius: 50%;
+    width: 80px; /* Reduce image size */
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+.team-member h3 {
+    font-size: 1.1rem; /* Reduce name font size */
+    margin: 5px 0;
+}
+
+.team-member p {
+    font-size: 0.9rem; /* Reduce role font size */
+    margin: 0;
+}
+
+/* Adjust the gap between "Meet Our Team" and "Contact Us" sections */
+.team {
+    margin-bottom: 50px; /* Add space below the team section */
+}
+
+.contact-section {
+    margin-top: 0; /* Remove any unnecessary top margin */
+    padding-top: 20px; /* Add a little padding for visual separation */
+}
+
+
+.contact-section {
+    background: #1a1a2e36; /* Dark background to match the theme */
+    color: #fff;
+    padding: 44px 20px;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #4ecca3;
+}
+
+.contact-section p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.contact-item {
+    background: #0f3460;
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.contact-item i {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #4ecca3;
+}
+
+.contact-item h3 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.contact-item a {
+    color: #4ecca3;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-item a:hover {
+    text-decoration: underline;
+}
+
+/* Scroll Down Arrow */
+.scroll-down {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+}
+
+.scroll-down span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg);
+    margin: 5px 0;
+    animation: scroll-down 1.5s infinite;
+    transition: transform 0.3s;
+}
+
+.scroll-down span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.scroll-down span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.scroll-down:hover span {
+    transform: rotate(45deg) translateY(5px);
+}
+
+@keyframes scroll-down {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translateY(-10px);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(45deg) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translateY(10px);
+    }
+}
+
+/* Style for the team member and social icons */
+.team-member {
+    display: flex;
+    flex-direction: column;  /* Stack elements vertically */
+    align-items: center;     /* Center align elements */
+    text-align: center;      /* Center the text */
+    margin: 10px;
+}
+
+.instagram-icon img {
+   padding: 10px;
+    width: 20px;       /* Control the width of the icon */
+    height: 20px;      /* Control the height to make it a square */
+    object-fit: cover; /* Ensures the image covers the entire square without distortion */
+    border-radius: 10%; /* Adds rounded corners if you want a subtle curve */
+    transition: transform 0.3s ease; /* Adds a smooth hover effect */
+}
+
+/* Hover effect for Instagram icon */
+.instagram-icon img:hover {
+    transform: scale(1.1);  /* Slightly increases the size when hovered */
+}

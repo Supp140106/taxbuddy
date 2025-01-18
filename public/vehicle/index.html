@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Tax Calculator</title>
+    
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Vehicle Tax Calculator</div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/getstarted">Back</a></li>
+          
+        </ul>
+      </nav>
+    </header>
+    <div class="container" id="calc">
+      <h1>Vehicle Tax Calculator</h1>
+      
+        <!-- Ex-Showroom Price -->
+        <label for="price">Ex-Showroom Price (₹)</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="Enter ex-showroom price"
+          required
+          min="0"
+        />
+
+        <!-- State Selection -->
+        <label for="state">Select Your State</label>
+        <select name="state" id="state">
+          <option value="" disabled selected>Select your state</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Assam">Assam</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Goa">Goa</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Jammu & Kashmir">Jammu & Kashmir</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Manipur">Manipur</option>
+          <option value="Meghalaya">Meghalaya</option>
+          <option value="Mizoram">Mizoram</option>
+          <option value="Nagaland">Nagaland</option>
+          <option value="Odisha">Odisha</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Tripura">Tripura</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="West Bengal">West Bengal</option>
+        </select>
+
+        <!-- Fuel Type -->
+        <label for="fuelType">Fuel Type</label>
+        <select
+          id="fuelType"
+          name="fuelType"
+          required
+          onchange="toggleEngineCapacity()"
+        >
+          <option value="" disabled selected>Select fuel type</option>
+          <option value="Electric">Electric</option>
+          <option value="Petrol">Petrol</option>
+          <option value="Diesel">Diesel</option>
+        </select>
+
+        <!-- Engine Capacity -->
+        <div id="engineCapacityContainer">
+          <label for="engineCapacity">Engine Capacity (cc)</label>
+          <input
+            type="number"
+            id="engineCapacity"
+            name="engineCapacity"
+            placeholder="Enter engine capacity"
+            min="0"
+          />
+        </div>
+        <!-- Car Category -->
+        <label for="carCategory">Car Category</label>
+        <select id="carCategory" name="carCategory" required>
+          <option value="" disabled selected>Select car category</option>
+          <option value="Hatchback">Hatchback</option>
+          <option value="Sedan">Sedan</option>
+          <option value="SUV">SUV</option>
+          <option value="MPV">MPV</option>
+          <option value="Crossover">Crossover</option>
+          <option value="Luxury">Luxury</option>
+          <option value="Convertible">Convertible</option>
+          <option value="Coupe">Coupe</option>
+        </select>
+
+        <!-- Second-Hand Status -->
+        <label for="isSecondHand">Is the car second-hand?</label>
+        <select id="isSecondHand" name="isSecondHand" required>
+          <option value="" disabled selected>Select</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+
+        <!-- Car Age (Hidden initially, will be shown if second-hand is selected) -->
+        <div id="carAgeContainer" class="hidden">
+          <label for="carAge">Car Age (years)</label>
+          <input
+            type="number"
+            id="carAge"
+            name="carAge"
+            placeholder="Enter car age"
+            min="0"
+          />
+        </div>
+
+        <!-- Include Accessories -->
+        <label for="includeAccessories">Include Accessories</label>
+        <select id="includeAccessories" name="includeAccessories" required>
+          <option value="" disabled selected>Select</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+
+        <!-- Include Extended Warranty -->
+        <label for="includeExtendedWarranty">Include Extended Warranty</label>
+        <select
+          id="includeExtendedWarranty"
+          name="includeExtendedWarranty"
+          required
+        >
+          <option value="" disabled selected>Select</option>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+
+        <!-- Submit Button -->
+        <button id="Submit1">Calculate Tax</button>
+      
+    </div>
+
+    <main id="resultpage" style="display: none;">
+      <section class="calculator">
+          <h1>Vehicle Tax Summary</h1>
+          <div class="summary-box">
+              <div class="payment-item">
+                  <label>Ex-Showroom Price:</label>
+                  <span id="exShowroomPrice">₹0</span>
+              </div>
+              <div class="payment-item">
+                  <label>Road Tax:</label>
+                  <span id="roadTax">₹0</span>
+              </div>
+              <div class="payment-item">
+                  <label>GST:</label>
+                  <span id="gst">₹0</span>
+              </div>
+              <div class="payment-item">
+                  <label>Insurance:</label>
+                  <span id="insurance">₹0</span>
+              </div>
+              <div class="payment-item">
+                  <label>Additional Charges:</label>
+                  <span id="additionalCharges">₹0</span>
+              </div>
+              <div class="payment-item total">
+                  <label>Total Tax:</label>
+                  <span id="totalTax">₹0</span>
+              </div>
+              <div class="payment-item total">
+                  <label>On-Road Price:</label>
+                  <span id="onRoadPrice">₹0</span>
+              </div>
+          </div>
+          <div class="statement">
+              <p id="statement"></p>
+          </div>
+      </section>
+  </main>
+
+  <div class="tooltip" style="padding: 30px;">
+    <button class="fixed-button" onclick="window.open('/chat','_blank')"><img src="reva.png" height="70px" width="70px"></button>
+    <span class="tooltip-text">ReVa Ai</span>
+</div>
+
+    <button id="goback" style="display: none;">Back to Calculator</button>
+    <script>
+      function toggleEngineCapacity() {
+        const fuelType = document.getElementById("fuelType").value;
+        const engineCapacityContainer = document.getElementById(
+          "engineCapacityContainer"
+        );
+
+        if (fuelType === "Electric") {
+          engineCapacityContainer.style.display = "none";
+        } else {
+          engineCapacityContainer.style.display = "block";
+        }
+      }
+
+      const isSecondHandSelect = document.getElementById("isSecondHand");
+      const carAgeContainer = document.getElementById("carAgeContainer");
+
+      // Show/Hide Car Age based on whether the car is second-hand
+      isSecondHandSelect.addEventListener("change", () => {
+        if (isSecondHandSelect.value === "true") {
+          carAgeContainer.classList.remove("hidden");
+        } else {
+          carAgeContainer.classList.add("hidden");
+        }
+      });
+
+      // Handle form submission
+      
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

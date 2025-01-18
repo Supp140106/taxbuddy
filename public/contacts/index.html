@@ -1,45 +1,143 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Tax Buddy</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>About Us</title>
+    <link rel="stylesheet" href="c1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head>
+<header>
+    <div class="container">
+        <a href="/" class="home-button">Home</a>
+    </div>
+</header>
 <body>
-    <header>
-        <div class="logo">TaxBuddy</div>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/login">Login</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Background with Space Effect -->
+    <div class="space-gradient"></div>
+    <div id="particle-container"></div>
 
-    <main class="contact-container">
-        <h1 id="contacts">Contact Us</h1>
-        <p>If you have any questions or need assistance, feel free to reach out to us.</p>
-        
-        <div class="contact-details">
-            <h3>Email:</h3>
-            <p>ankitnitdgpcs@gmail.com</p>
+    <div class="content">
+        <section class="about">
+            <h1 data-aos="fade-up">About Us</h1>
+            <p data-aos="fade-right">
+                Welcome to Tax Buddy, an initiative by the team NULL Pointers! We are a group of tech enthusiasts working to simplify and automate tax-related processes for everyone. Our goal is to make tax calculations, filings, and planning as easy as possible by providing user-friendly and accurate solutions.
+            </p>
+        </section>
+
+        <section class="team">
+            <h2 data-aos="fade-left">Meet Our Team</h2>
+                <div class="team-grid">
+                    <!-- Team Member 1 -->
+                    <div class="team-member" data-aos="zoom-in">
+                        <img src="ankit.jpeg" alt="Team Member 1">
+                        <h3>Ankit Ranjan</h3>
+                        <p>Creative Designer</p>
+                        <a href="https://instagram.com/ankitranjan" target="_blank" class="instagram-icon">
+                            <img src="insta.webp" alt="Instagram">
+                        </a>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="team-member" data-aos="zoom-in">
+                        <img src="supprit.jpg" alt="Team Member 2">
+                        <h3>Supprit Das</h3>
+                        <p>Project Lead</p>
+                        <a href="https://instagram.com/supprit" target="_blank" class="instagram-icon">
+                            <img src="insta.webp" alt="Instagram">
+                        </a>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="team-member" data-aos="zoom-in">
+                        <img src="bishal.jpeg" alt="Team Member 3">
+                        <h3>Bishal Kunwar</h3>
+                        <p>Developer</p>
+                        <a href="https://instagram.com/bishalkunwar" target="_blank" class="instagram-icon">
+                            <img src="insta.webp" alt="Instagram">
+                        </a>
+                    </div>
+                    <!-- Team Member 4 -->
+                    
+                    <!-- Team Member 5 -->
+                    <div class="team-member" data-aos="zoom-in">
+                        <img src="rishu.png" alt="Team Member 5">
+                        <h3>Rishu Raj Sharma</h3>
+                        <p>Developer</p>
+                        <a href="https://instagram.com/rishu" target="_blank" class="instagram-icon">
+                        <img src="insta.webp" alt="Instagram">
+                        </a>
+                    </div>
+                </div>
+                <div class="scroll-down" onclick="scrollToContact()">
+                    <span></span>
+                    <span></span>
+                   
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact-section" data-aos="fade-up" data-aos-duration="2000">
+                <div class="container">
+                    <h2>Contact Us</h2>
+                    <p>We'd love to hear from you. Reach out to Tax Buddy or NULL Pointers for any queries.</p>
             
-            <h3>Phone:</h3>
-            <p>+91 6969696969</p>
-        </div>
-    </main>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <h3>Phone</h3>
+                            <p>+91 7085436473</p>
+                        </div>
+            
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email</h3>
+                            <p>taxbuddytech@gmail.com</p>
+                        </div>
+            
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <h3>GitHub</h3>
+                            <a href="https://github.com/NullPointers" target="_blank">github.com/NullPointers</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <footer>
-        <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
-    </footer>
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        let contact = document.getElementById("contacts");
-        contact.addEventListener("click",()=>{
-            window.location.href = "/contacts"
-        })
+        AOS.init();
+
+        // Particle Animation
+        const particleContainer = document.getElementById('particle-container');
+        for (let i = 0; i < 100; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 5}s`;
+            particleContainer.appendChild(particle);
+        }
     </script>
+<script>
+    // Function to scroll smoothly to the Contact Us section
+    function scrollToContact() {
+        const contactSection = document.getElementById('contact');
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Check if the user is at the bottom of the page
+    window.onscroll = function() {
+        const scrollDownButton = document.querySelector('.scroll-down');
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const pageHeight = document.documentElement.scrollHeight;
+
+        // If user is at the bottom of the page, hide the arrow
+        if (scrollPosition >= pageHeight) {
+            scrollDownButton.style.opacity = '0';
+        } else {
+            scrollDownButton.style.opacity = '1';
+        }
+    };
+</script>
+    
 </body>
 </html>

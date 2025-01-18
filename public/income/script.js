@@ -1,3 +1,5 @@
+
+
 // Function to check if the user lives in a metro city
 function checkMetroCity() {
     const metroYes = document.getElementById("metro-yes");
@@ -76,7 +78,8 @@ function getData() {
 
         NPS: document.getElementById("nps-info")?.value || 0,
     };
-
+    let data = JSON.stringify(personalDetails)
+    localStorage.setItem("income-data",data);
     return personalDetails;
 }
 
@@ -175,7 +178,8 @@ document
         newtax2024.innerText = `₹${data.new24}`;
         newtax2025.innerText = `₹${data.new25}`;
         aistatement.innerText = `${data.statement}`
-        console.log(data)
+        data = JSON.stringify(data);
+        localStorage.setItem("income-result",data)
 
         if (loadingWrapper) {
             loadingWrapper.style.display = 'none'; // Hide the loading wrapper

@@ -3,25 +3,30 @@
 <head>
     
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="taxbuddy" type="image/x-icon">
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Income Tax Form</title>
     <link rel="stylesheet" href="income.css">
 </head>
 <body>
+    <div class="tooltip" style="padding: 30px;">
+        <button class="fixed-button" onclick="window.open('/chat','_blank')"><img src="reva.png" height="70px" width="70px"></button>
+        <span class="tooltip-text">ReVa Ai</span>
+    </div>
     <header>
             <div class="logo">TaxBuddy</div>
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/contacts">Contact Us</a></li>
-                    <li><a href="/login">Login</a></li>
+                    <li><a href="/getstarted">Back</a></li>
+                    
+                    <li id="account" style="display: none;"><a href="/account"><img class="profile-icon" src="profile.jpeg"></a></li>
                 </ul>
             </nav>
     </header>
     
     <main id="mainform">
-        <h1 style="color: #000000;text-align: center;">Calculate Your Income Tax</h1>
+        <h1 style="color: #f8f0f0;text-align: center;">Calculate Your Income Tax</h1>
         <div class="form-data">
         <!-- Section 1: Personal Details -->
         <section class="form-section" id="personal-details">
@@ -79,7 +84,7 @@
             <label for="life-insurance">Life Insurance:</label>
             <input type="number" id="life-insurance" placeholder="Enter life insurance amount" >
 
-            <label for="elss">ELSS <span class="info-icon" data-tooltip="Equity Linked Savings Scheme: Tax-saving mutual funds.">ℹ️</span>:</label>
+            <label for="elss">ELSS <span class="info-icon" data-tooltip="Equity Linked Savings Scheme: Tax-saving mutual funds. www.google.com ">ℹ️</span>:</label>
             <input type="number" id="elss" placeholder="Enter ELSS amount" >
 
             <label for="home-loan">Home Loan Principal:</label>
@@ -195,8 +200,8 @@
     </div>
 </section>
 <!-- Section 80EE & 80EEA -->
-<section class="form-section" id="section-80ee-80eea">
-    <h2>Section 80EE & 80EEA Details</h2>
+<section class="form-section" id="section-80ee-80eea" data-tooltip="">
+    <h2>Section 80EE & 80EEA Details</h2><span class="info-icon" data-tooltip="Tax deduction on home loan interest, ₹50,000 limit.Additional home loan interest deduction for affordable housing, ₹1.5 lakh."></span>
     
     <label for="loan-sanction-period">Did you take the loan during the sanctioned period (1st April 2016 to 31st March 2017 for 80EE or 1st April 2019 to 31st March 2022 for 80EEA)?</label>
     
@@ -467,7 +472,7 @@
 
 
 
-
+<button class="fixed-button" onclick="window.open('/chat', '_blank')">+</button>
 <footer>
     <div>
         <p>&copy; 2025 TaxBuddy. All rights reserved.</p>

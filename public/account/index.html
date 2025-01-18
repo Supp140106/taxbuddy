@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Card</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="profile-card">
+      <img src="profile.jpeg" alt="Profile Photo" />
+      <h2 id="profile-name"></h2>
+      <p id="profile-email"></p>
+    </div>
+
+    <div class="taxresult">
+      <section class="calculator">
+        <h1 id="income-tax-summary">Your Tax Summary of Income Tax</h1>
+        <div class="summary-box">
+          <div class="tax-item">
+            <label class="result">Old Regime Tax:</label>
+            <span id="income-old-tax">₹0</span>
+          </div>
+          <div class="tax-item">
+            <label class="result">New Regime Tax (2024):</label>
+            <span id="income-new-tax-2024">₹0</span>
+          </div>
+          <div class="tax-item">
+            <label class="result">New Regime Tax (2025):</label>
+            <span id="income-new-tax-2025">₹0</span>
+          </div>
+          <div class="statement">
+            <p id="income-statement"></p>
+          </div>
+        </div>
+        <div class="center-button">
+          <a href="/income" id="income-go-back" style="text-decoration: none; color: aliceblue;">Lets calculate</a>
+        </div>
+      </section>
+    </div>
+
+    <section class="calculator">
+      <h1 id="payment-summary">Your Payment Summary</h1>
+      <div class="summary-box">
+        <div class="payment-item">
+          <label>Stamp Duty:</label>
+          <span id="payment-stamp-duty">₹0</span>
+        </div>
+        <div class="payment-item">
+          <label>Registration Charge:</label>
+          <span id="payment-registration-charge">₹0</span>
+        </div>
+        <div class="payment-item">
+          <label>GST:</label>
+          <span id="payment-gst">₹0</span>
+        </div>
+        <div class="payment-item">
+          <label>TDS:</label>
+          <span id="payment-tds">₹0</span>
+        </div>
+        <div class="payment-item total">
+          <label>Total Payable:</label>
+          <span id="payment-total-payable">₹0</span>
+        </div>
+      </div>
+      <div class="statement">
+        <p id="payment-statement">Please input values to calculate taxes.</p>
+      </div>
+      <div class="center-button">
+        <a href="/form/property" id="payment-optimize" style="text-decoration: none;color: aliceblue;">Calculate Property Tax</button>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

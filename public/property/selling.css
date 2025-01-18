@@ -1,0 +1,167 @@
+
+
+main {
+    background: rgba(0, 0, 0, 0.2); /* Semi-transparent overlay */
+    padding: 20px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, #4A3F35, #D1CBC7, #4A3F35);
+    color: #2c3e50;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #180d06;
+    color: white;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+header .logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 22px;
+}
+
+header nav ul li a:hover {
+    color: #be92a0;
+}
+header nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #9b9895;
+    transition: width 0.3s;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header nav ul li a:hover::after {
+    width: 100%;
+}
+
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.calculator {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+}
+
+.summary-box {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.payment-item.total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    display: flex;
+    justify-content: space-between;
+}
+
+.statement {
+    margin-top: 20px;
+    padding: 10px;
+    background: #F9F9F9;
+    border-left: 4px solid #4CAF50;
+    font-style: italic;
+}
+
+.center-button {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #4A3F35;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #00B312;
+}
+
+footer {
+    background: #423D36;
+    color: #D3D0C7;
+    padding: 08px;
+    text-align: center;
+    box-shadow: 0 -5px 5px rgba(255, 255, 255, 0.3);
+   
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('property.png');  /* Update to use the actual path of the uploaded image */
+    background-size: cover;  /* Make sure the image covers the entire footer */
+    background-position: center;  /* Center the image */
+    opacity: 0.2;
+    z-index: -1;
+}
+.dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}

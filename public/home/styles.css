@@ -356,3 +356,83 @@ footer {
         top: calc(var(--cursor-y) - 8px);
     }
 }
+
+
+
+.fixed-button {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fixed-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.fixed-button:active {
+    transform: scale(0.95);
+}
+
+/* Tooltip container */
+.tooltip {
+    padding: 30px;
+    z-index: 40;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tooltip text */
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 60px; /* Position above the button */
+    right: 0;
+    z-index: 1;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show tooltip text on hover */
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Profile Icon Styles */
+.profile-icon {
+    width: 30px; /* Adjust the size */
+    height: 30px; /* Adjust the size */
+    border-radius: 50%; /* Makes the icon round */
+    object-fit: cover; /* Ensures the image covers the area */
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Scale up on hover for a nice effect */
+.profile-icon:hover {
+    transform: scale(1.1);
+}

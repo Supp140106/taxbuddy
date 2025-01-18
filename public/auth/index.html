@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Login Page</title>
+  </head>
+  
+    <header>
+      <div><a href="/" class="home-button">Home</a></div>
+</header>
+<body>
+  <!-- Falling stars background -->
+  <div class="rain">
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+  </div>
+    <div class="container" id="container">
+      <div class="sign-up">
+        <form>
+          <h2>Create Account</h2>
+          <span>or use email for registeration</span>
+          <input type="text" placeholder="Name" id="sname"/>
+          <input type="text" placeholder="Mobile Number" id="sphone" />
+          <input type="password" placeholder="Set Password" id="spassword"/>
+          <div class="otp">
+            <input type="text" placeholder="Email" id="email"  />
+            <button id="send-otp">Send OTP</button>
+          </div>
+          <div id="otp-container"></div>
+        </form>
+      </div>
+      <div class="sign-in">
+        <form>
+          <h2 style="color: black;">Log In</h2>
+          <div class="icons">
+            
+            <a href="https://github.com/Supp140106/taxbuddy" class="icon"><i class="fa-brands fa-github"></i></a>
+          </div>
+          <span>or use email password</span>
+          <input type="text" placeholder="Email or Mobile" id="lemail"/>
+          <input type="password" placeholder="Password" id="lpassword"/>
+          <a href="/sec/changepassword">Forgot password</a>
+          <button id="signin">Log In</button>
+        </form>
+      </div>
+      <div class="toogle-container">
+        <div class="toogle">
+          <div class="toogle-panel toogle-left">
+            <h1>Welcome User!</h1>
+            <p>If you already have an account</p>
+            <button class="hidden" id="login">Log In</button>
+          </div>
+          <div class="toogle-panel toogle-right">
+            <h1>Hello, User!</h1>
+            <p>If you don't have an account</p>
+            <button class="hidden" id="register">Sign Up</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <script>
+      // JavaScript to dynamically create raindrops
+      window.onload = () => {
+  const rain = document.querySelector('.rain');
+  
+  // Function to create raindrops
+  function createRain() {
+    const raindrop = document.createElement('div');
+    raindrop.classList.add('raindrop');
+
+    // Set a random horizontal position for each raindrop
+    raindrop.style.left = `${Math.random() * 100}vw`;  // random position across full width
+    raindrop.style.animationDuration = `${Math.random() * 2 + 1}s`;  // random speed
+    raindrop.style.animationDelay = `${Math.random() * 2}s`;  // random delay before start
+
+    // Append the raindrop to the rain container
+    rain.appendChild(raindrop);
+
+    // Remove the raindrop once it falls past the screen
+    setTimeout(() => {
+      rain.removeChild(raindrop);
+    }, 3000);  // Duration matching the animation time
+  }
+
+  // Continuously create raindrops every 100ms
+  setInterval(createRain, 100);
+};
+
+
+ 
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

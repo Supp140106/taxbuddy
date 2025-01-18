@@ -1,7 +1,8 @@
 require("dotenv").config(); // using .env file
 const express = require("express");
 const mongoose = require("mongoose");
-const nodemailer = require('nodemailer');
+const cookieParser = require('cookie-parser');
+const bot = require("./router/bot")
 const get = require("./router/get");
 const post = require("./router/post");
 const form = require("./router/form")
@@ -17,6 +18,7 @@ const app = express();
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Route Definitions
 app.use("/submit", post);
@@ -26,6 +28,7 @@ app.use("/auth", authorization); // This is for Sign up and Sign in
 app.use("/property",property);
 app.use("/form",form);
 app.use("/otp",otp);
+app.use("/bot",bot)
 
 app.use("/",express.static("./public/home"))
 app.use("/",get);

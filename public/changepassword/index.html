@@ -1,0 +1,181 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change Password with OTP Verification</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 40%; /* Reduced from 60% */
+        max-width: 400px; /* Added a maximum width for smaller screens */
+        animation: fadeIn 1s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .container h2 {
+        margin-bottom: 1rem;
+        font-weight: 500;
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .form-group input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+      .btn {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+      .otp-group {
+        display: flex;
+        justify-content: space-between;
+      }
+      .otp-group input {
+        width: 48px;
+        text-align: center;
+        font-size: 1.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Change Password</h2>
+      <form>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <button type="button" class="btn mb-4" style="border-radius: 40px;" onclick="sendOTP()">
+          Send OTP
+        </button>
+        <div class="form-group">
+          <label for="otp">OTP</label>
+          <div class="otp-group">
+            <input
+              type="text"
+              id="otp1"
+              name="otp1"
+              maxlength="1"
+              required
+              oninput="moveToNext(this, 'otp2')"
+            />
+            <input
+              type="text"
+              id="otp2"
+              name="otp2"
+              maxlength="1"
+              required
+              oninput="moveToNext(this, 'otp3')"
+            />
+            <input
+              type="text"
+              id="otp3"
+              name="otp3"
+              maxlength="1"
+              required
+              oninput="moveToNext(this, 'otp4')"
+            />
+            <input
+              type="text"
+              id="otp4"
+              name="otp4"
+              maxlength="1"
+              required
+              oninput="moveToNext(this, 'otp5')"
+            />
+            <input
+              type="text"
+              id="otp5"
+              name="otp5"
+              maxlength="1"
+              required
+              oninput="moveToNext(this, 'otp6')"
+            />
+            <input type="text" id="otp6" name="otp6" maxlength="1" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="new-password">New Password</label>
+          <input
+            type="password"
+            id="new-password"
+            name="new-password"
+            placeholder="Enter new password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="Confirm new password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn" id="change" style="border-radius: 30px;">Change Password</button>
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

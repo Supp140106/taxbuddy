@@ -30,6 +30,7 @@ router.post("/income", async (req, res) => {
   person.EPF = parseFloat(persondata.EPF) || 0; //employee provident fund
   person.PPF = parseFloat(persondata.PPF) || 0; // public provident fund
   person.NSC = parseFloat(persondata.NSC) || 0; // national saving Certificates
+  person.TDS = parseFloat(persondata.TDS) || 0;
 
   person.lifeinsurancepremium =
     parseFloat(persondata.lifeinsurancepremium) || 0;
@@ -184,20 +185,37 @@ router.post("/income", async (req, res) => {
       TTA_TTB +
       edloansection80 +
       donation +
-      person.stdold +
+     
       person.hra +
       LTA +
       person.eeoreea +
       person.disability +
       person.NPS);
-  let promt = `As an experienced and approachable tax advisor specializing in Indian tax law, provide clear and actionable tax advice. Limit your response to 200 words, focusing on practical tax-saving strategies, deductions, credits, and important deadlines. Prioritize the most beneficial and relevant strategies for the individual’s financial situation, while highlighting any key changes in Indian tax law that could affect their filings. Avoid technical jargon and explain concepts in a simple, friendly manner suitable for all taxpayers. Include a reminder to seek personalized advice from a professional for the best results.
+
+      let taxabinc1 = taxabinc;
+      let taxabinc2 = taxabinc;
+  if(person.income_salary!=0) {
+    taxable = taxable - person.stdold;
+    taxabinc1 = taxabinc - 50000;
+    taxabinc2 = taxabinc - 75000;
+  }
+
+  let  t1 = "";
+  let t2 = "";
+
+  if(taxabinc1<500000) t1 = "Optimizing your data, we would like to suggest that under Section 87A of the Income Tax Act, 1961, you can save up to an amount of ₹25,000 under the new tax regime.\n";
+  if(taxabinc2<700000) t2 = "We suggest that under Section 87A of the Income Tax Act, 1961, you could save up to an amount of ₹12,500 under the old tax regime.\n"
+
+let promt = ` As an experienced and approachable tax advisor specializing in Indian tax law, provide clear and actionable tax advice. Limit your response to 250 words, focusing on practical tax-saving strategies, deductions, credits, and important deadlines. Prioritize the most beneficial and relevant strategies for the individual’s financial situation, while highlighting any key changes in Indian tax law that could affect their filings. Avoid technical jargon and explain concepts in a simple, friendly manner suitable for all taxpayers. Include a reminder to seek personalized advice from a professional for the best results.
 
 The user data is as follows:
 
 Personal Info: ${person}
 Old Tax Calculation: ${taxcal.income_taxcalcold(taxable, person.age)}
-New Tax Calculation for AY 2024-25: ${taxcal.income_taxcalcnew_ay2425(taxabinc)}
-New Tax Calculation for AY 2025-26: ${taxcal.income_taxcalcnew_ay2526(taxabinc)}`;
+New Tax Calculation for AY 2024-25: ${taxcal.income_taxcalcnew_ay2425(taxabinc1)}
+New Tax Calculation for AY 2025-26: ${taxcal.income_taxcalcnew_ay2526(taxabinc2)}. Say Every thing in fullform.And write in a very friendly manner. Give the Wikipedia link of all
+ the Sections involved in a tabular form where the user can copy the links fastly in BOLD LETTERS. Make the result very much presentable as it would be used in website user should understand it 
+ .Good Readable format.`;
 
 
   
@@ -206,7 +224,7 @@ New Tax Calculation for AY 2025-26: ${taxcal.income_taxcalcnew_ay2526(taxabinc)}
     old: taxcal.income_taxcalcold(taxable, person.age).toFixed(2),
     new24: taxcal.income_taxcalcnew_ay2425(taxabinc).toFixed(2),
     new25: taxcal.income_taxcalcnew_ay2526(taxabinc).toFixed(2),
-    statement : result.response.text()
+    statement : `${t1} ${t2} ${result.response.text()}`
   });
 });
 

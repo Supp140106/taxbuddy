@@ -3,8 +3,26 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f0f8ff, #a7d8f7);
+    background: linear-gradient(90deg, #614e41 , #cecbc8 , #614e41); /* Soft gradient background */
     color: #2c3e50;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://path_to_your_image.jpg') center center / cover no-repeat;
+    filter: blur(1px);
+    z-index: -1;
+}
+
+/* Overlay to enhance content readability */
+main {
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    padding: 20px;
 }
 
 /* Header */
@@ -12,15 +30,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 150, 136, 0.8); /* Bright teal background */
-    color: white;
+    background-color: #180d06; /* Bright teal background */
+    color: rgb(255, 255, 255);
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px #cecbc8;
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 10;
-    
 }
 
 /* Logo */
@@ -47,7 +64,7 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-    color: #ffeb3b; /* Bright yellow on hover */
+    color: #74706c; /* Bright yellow on hover */
     transform: scale(1.1) rotate(5deg);
 }
 
@@ -56,7 +73,7 @@ header nav ul li a::after {
     position: absolute;
     width: 0%;
     height: 2px;
-    background-color: #ffeb3b;
+    background-color: #9b9895;
     transition: width 0.3s;
     bottom: 0;
     left: 50%;
@@ -67,10 +84,6 @@ header nav ul li a:hover::after {
     width: 100%;
 }
 
-main {
-    margin: 20px auto;
-    max-width: 600px;
-}
 /* Main Section */
 main {
     padding: 20px;
@@ -83,12 +96,13 @@ h1 {
     color: #000000;
 }
 
+
 /* Form Styles */
 form {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.505);
 }
 
 .form-group {
@@ -101,19 +115,42 @@ label {
     margin-bottom: 5px;
 }
 
+
+/* Style for box-option (default state) */
+.radio-options .box-option {
+    display: inline-block;
+    padding: 12px 20px;
+    border: 2px solid #614e41; /* Default border color */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition */
+    text-align: center;
+    background-color: #6d686849; /* Default background */
+    color: #333; /* Default text color */
+}
+
+/* Hover effect for box-option */
+.radio-options .box-option:hover {
+    background-color: #7f6951; /* Hover background color */
+    color: white; /* Hover text color */
+    border-color: #7f6951; /* Change border color on hover */
+    transform: scale(1.1); /* Slightly enlarge the box */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
 input,
 select {
     width: 90%;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #767272;
     border-radius: 5px;
     outline: none;
 }
 
 input:focus,
 select:focus {
-    border-color: #4caf50;
+    border-color: #614e41;
     box-shadow: 0 0 5px rgba(0, 150, 136, 0.5);
 }
 
@@ -122,6 +159,7 @@ select:focus {
     gap: 10px;
     align-items: center;
 }
+
 .center-button {
     display: flex;
     justify-content: center; /* Horizontally center */
@@ -130,20 +168,23 @@ select:focus {
 }
 
 button {
-    background-color: #4caf50;
+    background-color: #614e41;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     transition: background-color 0.3s, transform 0.2s;
     margin: auto;
 }
 
 button:hover {
-    background-color: #388e3c;
-    transform: scale(1.05);
+    background-color: #614e41;
+    color: #ffffff;
+    transform: scale(1.15);
+    font-size: larger;
+    font-style: inherit;
 }
 
 /* Hidden Sections */
@@ -162,49 +203,26 @@ button:hover {
 .yes-no-box {
     display: inline-block;
     padding: 12px 20px;
-    border: 2px solid #4CAF50; /* Green border for "Yes" */
+    border: 2px solid #614e4111; 
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
 }
 
-.yes-no-box:hover {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.yes-no-box input[type="radio"] {
-    display: none; /* Hide the actual radio button */
-}
-
-/* Styling for the 'Yes' option */
-.yes-no-box#yes {
-    background-color: hsl(0, 0%, 100%);
-    color: rgb(255, 255, 255);
-}
-
-.yes-no-box#no {
-    background-color: #ffffff;
-    color: rgb(255, 0, 0);
-}
-
-/* When checked (selected) */
-.yes-no-box input[type="radio"]:checked + label {
-    background-color: #4CAF50;
-    color: white;
-}
-
 /* Hover effect for individual options */
 .yes-no-box:hover {
-    background-color: #4CAF50;
+    background-color: #7f6951;
     color: white;
+    z-index: 3;
 }
 
 /* Additional styling when option is selected */
 input[type="radio"]:checked + label {
     border: 2px solid #000;
     font-weight: bold;
+    background-color: #a3947c ;
+    color: #fff;
 }
 
 /* Styling for horizontal options */
@@ -229,28 +247,18 @@ input[type="radio"]:checked + label {
     color: black; /* Default text color */
 }
 
-/* Yes option styling */
-#yes-label {
-    background-color: #ffffff;
-    color: rgb(255, 255, 255);
-    border: 2px solid #4CAF50;
-}
-
-/* No option styling */
-#no-label {
-    background-color: #ffffff;
-    color: rgb(255, 255, 255);
-    border: 2px solid #ffffff;
-}
-
 /* Hide radio buttons */
 input[type="radio"] {
     display: none;
 }
 
+input[type="date"] {
+    accent-color: #614e41; /* Your desired color */
+}
+
 /* Selected (checked) styling */
 input[type="radio"]:checked + label {
-    border: 2px solid rgb(57, 255, 2);
+    border: 2px solid #180d06;
     filter: brightness(0.9);
 }
 
@@ -305,81 +313,198 @@ main {
     flex: 1; /* Takes up available space, pushing the footer down */
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(50%) sepia(60%) saturate(500%) hue-rotate(50deg);
+    cursor: pointer;
+}
+
+/* Card/Box Styling */
+.card {
+    background-color: #2E2C29;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px;
+    transition: transform 0.3s, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
 /* Footer */
 footer {
-    background-color: rgba(0, 150, 136, 0.8);
-    color: white;
+    background: #423D36;
+    color: #D3D0C7;
+    padding: 08px;
     text-align: center;
-    padding: 15px;
-    position: relative;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 -5px 5px rgba(255, 255, 255, 0.3);
+   
 }
 
 footer::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('money-flow.gif');
-    background-size: cover;
-    opacity: 0.1;
-    pointer-events: none;
+    background-image: url('property.png');  /* Update to use the actual path of the uploaded image */
+    background-size: cover;  /* Make sure the image covers the entire footer */
+    background-position: center;  /* Center the image */
+    opacity: 0.2;
     z-index: -1;
 }
 
 
 
+/* Flatpickr Styles */
+.flatpickr-calendar {
+    background: rgba(0, 0, 0, 0.7);
+    color: #D3D0C7;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.flatpickr-day {
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.flatpickr-day:hover {
+    background: #7F6951;
+    color: white;
+}
+
+.flatpickr-day.selected {
+    background: #614e41;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Flatpickr input field */
+.flatpickr-input {
+    background: #423D36;
+    color: #EAE0C8;
+    border: 1px solid #F1E0C6;
+    border-radius: 8px;
+    padding: 12px;
+}
+/* General Fade-in Animation */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+* {
+    animation: fadeIn 0.69s ease-in-out;
+}
+
+/* Smooth Transitions for Hover Effects */
+* {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effects on input and form fields */
+input:focus, select:focus, textarea:focus {
+    border-color: #E4D8A1;
+    box-shadow: 0 0 5px #E4D8A1;
+}
+
+/* Input Fields Hover */
+input:hover, select:hover, button:hover {
+    transform: scale(1.05);
+}
 
 
 
 
 
-
-
-/* The Result Display Box */
-/* Styling for the response section */
-.response-section {
+.calculator {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    
     text-align: center;
+    width: 400px;
+}
+
+.summary-box {
+    margin-top: 20px;
+    text-align: left;
+    
+}
+
+.payment-item {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-item label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.payment-item span {
+    float: right;
+    font-size: 16px;
+}
+
+.payment-item.total span {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+.center-button {
     margin-top: 20px;
 }
-
-/* Styling for the response box */
-.response-box {
-    background: #ffffff; /* White background */
-    padding: 20px 25px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    max-width: 500px;
-    margin: 0 auto; /* Center the box */
+button:hover {
+    background: #00b312;
 }
 
-/* Styling for individual response items */
-.response-item {
-    margin-bottom: 15px;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #2c3e50; /* Text color for labels */
+
+.statement {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-left: 4px solid #4caf50;
+    font-style: italic;
 }
 
-.response-item strong {
-    display: inline-block;
-    min-width: 150px; /* Aligns labels consistently */
-    color: #34495e; /* Stronger color for labels */
-    font-weight: bold;
+.dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
 }
 
-.response-item span {
-    color: #555555; /* Slightly lighter color for values */
+.dialog-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
 }
 
-/* Highlight the Total Payable field */
-.response-item.total {
-    font-size: 18px;
-    font-weight: bold;
-    color: #e74c3c; /* Red color for total payable */
-    border-top: 1px solid #ddd; /* Add a separator line above total */
-    padding-top: 10px;
-    margin-top: 10px;
+.dialog-content h2 {
+    margin-bottom: 10px;
+}
+
+.dialog-content p {
+    margin-bottom: 20px;
+}
+
+#go-back{
+    margin-bottom: 10px;
+    margin-top: 20px;
 }

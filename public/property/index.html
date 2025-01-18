@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon" />
     <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Property Tax Calculator</title>
     <link rel="stylesheet" href="property.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
       <div class="logo">Property Tax Calculator</div>
       <nav>
         <ul>
-          <li><a href="/getstarted">Back</a></li>
           <li><a href="/">Home</a></li>
+          <li><a href="/getstarted">Back</a></li>
+          
         </ul>
       </nav>
     </header>
 
-    <main id="mainform">
+    <main id="propertycal" >
       <section class="calculator">
-        <h1>Calculate Your Property Tax</h1>
+        <h1 style="color: #f5f5f5;">Calculate Your Property Tax</h1>
         <form id="tax-form">
           <div class="form-group">
             <label for="transaction-type">What are you doing?</label>
@@ -73,8 +78,20 @@
             </div>
 
             <div class="form-group">
-              <label for="state-type">State:</label>
-              <select id="state-type">
+              <label for="property-type">Type of Property:</label>
+              <select id="property-type">
+                <option value="property">Enter property type</option>
+                <option value="residential">Residential</option>
+                <option value="affordable">Affordable</option>
+                <option value="commercial">Commercial</option>
+                <option value="land">Land</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="state-type">Type of State:</label>
+              <select id="State">
+                <option value="Enter state">Enter your state</option>
                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                 <option value="Assam">Assam</option>
@@ -107,16 +124,6 @@
                 <option value="West Bengal">West Bengal</option>
               </select>
             </div>
-
-            <div class="form-group">
-              <label for="property-type">Type of Property:</label>
-              <select id="property-type">
-                <option value="residential">Residential</option>
-                <option value="affordable">Affordable</option>
-                <option value="commercial">Commercial</option>
-                <option value="land">Land</option>
-              </select>
-            </div>
           </div>
 
           <div id="selling-options" class="hidden">
@@ -130,20 +137,20 @@
             </div>
 
             <div class="form-group">
+              <label for="selling-price">Selling Price (₹):</label>
+              <input
+                type="number"
+                id="selling-price"
+                placeholder="Enter selling price"
+              />
+            </div>
+
+            <div class="form-group">
               <label for="improvement-cost">Improvement Cost (₹):</label>
               <input
                 type="number"
                 id="improvement-cost"
                 placeholder="Enter improvement cost"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="selling-price">Selling price (₹):</label>
-              <input
-                type="number"
-                id="selling-price"
-                placeholder="Enter Selling Price"
               />
             </div>
 
@@ -160,12 +167,220 @@
       </section>
     </main>
 
-    
+    <!-- The Result box of Buying -->
+    <main id="buyresult" style="display: none;">
+      <section class="calculator">
+        <h1>Your Payment Summary</h1>
+        <div class="summary-box">
+          <div class="payment-item">
+            <label>Stamp Duty:</label>
+            <span id="stamp-duty">₹0</span>
+          </div>
+          <div class="payment-item">
+            <label>Registration Charge:</label>
+            <span id="registration-charge">₹0</span>
+          </div>
+          <div class="payment-item">
+            <label>GST:</label>
+            <span id="gst">₹0</span>
+          </div>
+          <div class="payment-item">
+            <label>TDS:</label>
+            <span id="tds">₹0</span>
+          </div>
+          <div class="payment-item total">
+            <label>Total Payable:</label>
+            <span id="total-payable">₹0</span>
+          </div>
+        </div>
+        <div class="statement">
+          <p id="statement">Please input values to calculate taxes.</p>
+        </div>
+        <div class="center-button">
+          <button type="button" id="optimize">Optimize</button>
+        </div>
+      </section>
+    </main>
 
+    <div id="dialog-box" class="dialog">
+      <div class="dialog-content">
+          <h2>Optimization Suggestions</h2>
+          <p id="suggestion-text"></p>
+          <button id="close-dialog">Close</button>
+      </div>
+  </div>
+
+
+  <main id="sellresult" style="display: none;">
+    <section class="calculator">
+        <h1>Your Tax Summary</h1>
+        <div class="summary-box">
+            <div class="payment-item total">
+                <label>Total Tax:</label>
+                <span id="total-tax">₹0</span>
+            </div>
+        </div>
+        <div class="statement">
+            <p id="statement2"></p>
+        </div>
+       
+    </section>
+</main>
+
+
+
+
+  <button type="button" id="go-back" style="display: none;">Back to Calculator</button>
+
+  <div id="loading-wrapper" style="display: none; justify-content: center; align-items: center; height: 100vh; background-color: #f5f5f5; overflow: hidden; position: relative;">
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="money-symbol">₹</div>
+        <div class="money-symbol">₹</div>
+        <div class="money-symbol">₹</div>
+        <div class="money-symbol">₹</div>
+        <div class="money-symbol">₹</div>
+    </div>
+
+    <div class="loading-container" style="text-align: center; position: relative; z-index: 2;">
+        <div class="coin" style="width: 50px; height: 50px; background: gold; border-radius: 50%; position: absolute; top: -80px; left: 50%; transform: translateX(-50%) rotateY(0deg); animation: drop-and-bounce 1.5s infinite; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);">
+            <div style="content: '₹'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 20px; font-weight: bold; font-family: Arial, sans-serif;">₹</div>
+        </div>
+        <div class="loading-text" style="margin-top: 120px; font-size: 24px; color: #333; font-family: 'Playfair Display', Arial; animation: typing-animation 3s steps(18) infinite, fade-out 3s linear infinite;"></div>
+    </div>
+
+    <style>
+        /* Drop-and-Bounce Animation */
+        @keyframes drop-and-bounce {
+            0% {
+                top: -80px;
+                opacity: 0;
+                transform: translateX(-50%) rotateY(0deg);
+            }
+            30% {
+                top: 30px;
+                opacity: 1;
+                transform: translateX(-50%) rotateY(180deg);
+            }
+            50% {
+                top: 10px;
+                transform: translateX(-50%) rotateY(360deg);
+            }
+            70% {
+                top: 20px;
+                transform: translateX(-50%) rotateY(540deg);
+            }
+            100% {
+                top: 10px;
+                opacity: 0;
+                transform: translateX(-50%) rotateY(720deg);
+            }
+        }
+
+        /* Typing Animation */
+        @keyframes typing-animation {
+            0% { content: ""; }
+            5% { content: "g"; }
+            10% { content: "ge"; }
+            15% { content: "get"; }
+            20% { content: "getti"; }
+            25% { content: "getting"; }
+            30% { content: "getting your"; }
+            40% { content: "getting your tax"; }
+            50% { content: "getting your tax optimized"; }
+            60% { content: "getting your tax optimized."; }
+            70% { content: "getting your tax optimized..."; }
+            80% { content: "getting your tax optimized....."; }
+            100% { content: ""; }
+        }
+
+        @keyframes fade-out {
+            0%, 90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Loading Text */
+        .loading-text::before {
+            content: "";
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #333;
+            animation: typing-animation 3s steps(18) infinite, fade-out 3s linear infinite;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .money-symbol {
+            position: absolute;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: rgba(255, 215, 0, 0.7);
+            animation: move-symbols 4s linear infinite;
+        }
+
+        @keyframes move-symbols {
+            from {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Randomly Place Money Symbols */
+        .money-symbol:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .money-symbol:nth-child(2) { left: 30%; animation-delay: 0.5s; }
+        .money-symbol:nth-child(3) { left: 50%; animation-delay: 1s; }
+        .money-symbol:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+        .money-symbol:nth-child(5) { left: 90%; animation-delay: 2s; }
+    </style>
+</div>
     <footer>
       <p>&copy; 2025 TaxBuddy. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Populate the result page
+        document.getElementById("statement").textContent = statement;
+        document.getElementById(
+          "stamp-duty"
+        ).textContent = `₹${stampDuty.toLocaleString()}`;
+        document.getElementById(
+          "registration-charge"
+        ).textContent = `₹${registrationCharge.toLocaleString()}`;
+        document.getElementById("gst").textContent = `₹${gst.toLocaleString()}`;
+        document.getElementById("tds").textContent = `₹${tds.toLocaleString()}`;
+        document.getElementById(
+          "total-payable"
+        ).textContent = `₹${totalPayable.toLocaleString()}`;
+      });
+
+      // Dialog box functionality
+      const optimizeButton = document.getElementById("optimize");
+      const dialogBox = document.getElementById("dialog-box");
+      const closeDialog = document.getElementById("close-dialog");
+
+      optimizeButton.addEventListener("click", () => {
+        dialogBox.style.display = "flex";
+        
+      });
+
+      closeDialog.addEventListener("click", () => {
+        dialogBox.style.display = "none";
+      });
+    </script>
     <script src="property.js"></script>
   </body>
 </html>
