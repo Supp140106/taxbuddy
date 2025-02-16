@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="back-button-container">
+      <button id="go-back" onclick="goBack()" >← Back</button>
+  </div>
     <div class="profile-card">
       <img src="profile.jpeg" alt="Profile Photo" />
       <h2 id="profile-name"></h2>
       <p id="profile-email"></p>
+
+      <button id="logout" >Log Out</button>
     </div>
 
     <div class="taxresult">
       <section class="calculator">
-        <h1 id="income-tax-summary">Your Tax Summary of Income Tax</h1>
+        <h1 id="income-tax-summary" style="color: aliceblue;">Your Tax Summary of Income Tax</h1>
         <div class="summary-box">
           <div class="tax-item">
             <label class="result">Old Regime Tax:</label>
@@ -30,17 +35,17 @@
             <span id="income-new-tax-2025">₹0</span>
           </div>
           <div class="statement">
-            <p id="income-statement"></p>
+            <p id="income-statement" style="line-height: 2;"></p>
           </div>
         </div>
         <div class="center-button">
-          <a href="/income" id="income-go-back" style="text-decoration: none; color: aliceblue;">Lets calculate</a>
+          <a href="/form/income" id="income-go-back" style="text-decoration: none; color: aliceblue;">Lets calculate</a>
         </div>
       </section>
     </div>
 
     <section class="calculator">
-      <h1 id="payment-summary">Your Payment Summary</h1>
+      <h1 id="payment-summary" style="color: aliceblue;">Your Payment Summary</h1>
       <div class="summary-box">
         <div class="payment-item">
           <label>Stamp Duty:</label>
@@ -64,13 +69,18 @@
         </div>
       </div>
       <div class="statement">
-        <p id="payment-statement">Please input values to calculate taxes.</p>
+        <p id="payment-statement" style="line-height: 2;">Please input values to calculate taxes.</p>
       </div>
       <div class="center-button">
         <a href="/form/property" id="payment-optimize" style="text-decoration: none;color: aliceblue;">Calculate Property Tax</button>
       </div>
     </section>
+    <script>
+      function goBack() {
+            window.history.back();
+        }
 
+    </script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -387,6 +387,7 @@ footer {
     transform: scale(0.95);
 }
 
+
 /* Tooltip container */
 .tooltip {
     padding: 30px;
@@ -435,4 +436,68 @@ footer {
 /* Optional: Scale up on hover for a nice effect */
 .profile-icon:hover {
     transform: scale(1.1);
+}
+
+#faq {
+    padding: 40px 20px;
+    background-color: #fff;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.faq-item {
+    margin-bottom: 30px;
+}
+
+.faq-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #16404e;
+}
+
+.faq-item p {
+    font-size: 18px;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+
+
+
+/* Bouncing animation */
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Sparkling effect using box-shadow */
+@keyframes sparkle {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                    0 0 20px rgba(255, 255, 255, 0.6), 
+                    0 0 30px rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 1), 
+                    0 0 25px rgba(255, 255, 255, 0.7), 
+                    0 0 35px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                    0 0 20px rgba(255, 255, 255, 0.6), 
+                    0 0 30px rgba(255, 255, 255, 0.4);
+    }
 }

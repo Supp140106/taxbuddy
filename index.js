@@ -6,6 +6,7 @@ const bot = require("./router/bot")
 const get = require("./router/get");
 const post = require("./router/post");
 const form = require("./router/form")
+const stock = require("./router/stocks")
 const otp = require("./router/otp")
 const authorization = require("./router/authorization");
 const property = require('./router/property_tax')
@@ -29,6 +30,7 @@ app.use("/property",property);
 app.use("/form",form);
 app.use("/otp",otp);
 app.use("/bot",bot)
+app.use("/stock",stock)
 
 app.use("/",express.static("./public/home"))
 app.use("/",get);

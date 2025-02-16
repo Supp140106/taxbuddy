@@ -1,6 +1,7 @@
 let result = document.getElementById("resultpage")
-let calc = document.getElementById("calc")
-let goback = document.getElementById("goback")
+let calc = document.getElementById("calc");
+let goback = document.getElementById("goback");
+let loading = document.getElementById("loading-wrapper");
 
 
 
@@ -33,7 +34,7 @@ async function postFormData(url, data) {
 
 document.getElementById("Submit1").addEventListener("click", async (event) => {
   event.preventDefault(); // Prevent form submission to server
-
+  
   // Collect form data
   const formData = {
     exShowroomPrice: document.getElementById("price").value,
@@ -47,9 +48,10 @@ document.getElementById("Submit1").addEventListener("click", async (event) => {
     includeExtendedWarranty: document.getElementById("includeExtendedWarranty")
       .value,
   };
-
+  calc.style.display = "none"
+  loading.style.display = "block"
   let answer = await postFormData("/property/car", formData);
-  
+  loading.style.display = "none"
   document.getElementById(
     "exShowroomPrice"
   ).textContent = `₹${answer.exShowroomPrice.toLocaleString()}`;
@@ -73,7 +75,7 @@ document.getElementById("Submit1").addEventListener("click", async (event) => {
   // Update the statement
   document.getElementById(
     "statement"
-  ).innerText = `${answer.statement}.`;
+  ).innerText = `${answer.statement.replaceAll("*"," ")}.`;
 calc.style.display = "none"
 result.style.display = "flex"
 answer = JSON.stringify(answer);

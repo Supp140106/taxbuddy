@@ -1,0 +1,306 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000; /* Light sky blue background */
+    color: #2c3e50; /* Darker text color for better readability */
+    overflow-x: hidden;
+    background: linear-gradient(90deg, #000000,#09541f,#09541f, #000000); /* Soft gradient background */
+    animation: backgroundMove 15s ease-in-out infinite; /* Continuous background animation */
+}
+.loading-text::before {
+    content: "";
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #333;
+    animation: typing-animation 3s steps(18) infinite, fade-out 3s linear infinite;
+}
+
+        /* Background Animation
+        .background-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .money-symbol {
+            position: absolute;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: rgba(255, 215, 0, 0.7);
+            animation: move-symbols 4s linear infinite;
+        }
+
+        @keyframes move-symbols {
+            from {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) translateX(50px);
+                opacity: 0;
+            }
+        } */
+         /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, #000000, #09541f, #09541f, #000000);
+    color: #2c3e50;
+    overflow-x: hidden;
+    animation: backgroundMove 15s ease-in-out infinite;
+}
+
+/* Background Animation */
+.background-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.money-symbol {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(255, 215, 0, 0.7);
+    animation: move-symbols 4s linear infinite;
+}
+
+@keyframes move-symbols {
+    from {
+        transform: translateY(-10vh) translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100vh) translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Rest of the CSS remains the same */
+
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Bright teal background */
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(10, 246, 128, 0.3);
+    backdrop-filter: blur(5px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Logo */
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Navigation */
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+header nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 22px;
+    position: relative;
+    transition: color 0.4s, transform 0.4s;
+}
+
+header nav ul li a:hover {
+    color: #7ccd93; /* Bright green on hover */
+    transform: scale(1.1) rotate(5deg);
+}
+
+header nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #7ccd93;
+    transition: width 0.3s;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+header nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+}
+
+/* Main Section */
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Card */
+.card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.radio-options {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.radio-options .box-option {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Result */
+.result {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.result p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background: #007BFF;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Main Content Styling */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.calculator {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px;
+}
+
+.summary-box {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.payment-item {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.statement {
+    margin-top: 20px;
+    padding: 10px;
+    background: #F9F9F9;
+    border-left: 4px solid #4CAF50;
+    font-style: italic;
+}
+

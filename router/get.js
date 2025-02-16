@@ -35,7 +35,14 @@ router.use("/chat",express.static("./public/chat"))
 router.use("/sec/changepassword",express.static("./public/changepassword"))
 router.use("/test",express.static("./public/test"))
 router.use("/account", checkCookie, express.static("./public/account"));
+router.use("/faq",express.static("./public/faq"))
+router.use("/stock",express.static("./public/stocks"))
 
+
+router.get("/logout",(req,res)=>{
+  res.clearCookie("token")
+  res.redirect("/")
+})
 
 
 

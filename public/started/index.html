@@ -10,7 +10,7 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="logo">Tax Buddy</div>
+        <div class="logo"><div class="logo"><img src="image.png" style="height: 10%; width: 10%; padding: 0px; margin: 0px;"></div></div>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
@@ -38,6 +38,11 @@
         <div class="section" id="vehicle-tax" >
             <div><img src="car.png" alt="Vehicle Tax Icon" id="png" class="icon"></div>
             <p>Vehicle Tax</p>
+        </div>
+
+        <div class="section" id="stocks">
+            <div><img src="stock.png" alt="Vehicle Tax Icon" id="png1" class="icon"></div>
+            <p >Stocks</p>
         </div>
     </section>
 
@@ -83,7 +88,10 @@ sections.forEach((section) => {
         section.style.transform = 'rotateX(0deg) rotateY(0deg)';
     });
 });
-
+document.getElementById("stocks").addEventListener("click",(e)=>{
+    e.preventDefault()
+    window.location.href = "/stock"
+})
 document.getElementById("property-tax").addEventListener("click",()=>{
     window.location.href = "/form/property"
 })

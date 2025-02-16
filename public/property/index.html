@@ -11,9 +11,10 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  
+
     <header>
-      <div class="logo">Property Tax Calculator</div>
+      <div class="logo"><img src="image.png" style="height: 10%; width: 10%; padding: 0px; margin: 0px;"></div>
       <nav>
         <ul>
           <li><a href="/">Home</a></li>
@@ -22,10 +23,14 @@
         </ul>
       </nav>
     </header>
+    <body>
+      <div class="tooltip" style="padding: 30px;">
+        <button id="fix45" onclick="window.open('/chat','_blank')"><img src="reva.png" height="80px" width="80px"></button>
 
+    </div>
     <main id="propertycal" >
       <section class="calculator">
-        <h1 style="color: #f5f5f5;">Calculate Your Property Tax</h1>
+        <h1 style="color: #000000;">Calculate Your Property Tax</h1>
         <form id="tax-form">
           <div class="form-group">
             <label for="transaction-type">What are you doing?</label>
@@ -381,6 +386,44 @@
         dialogBox.style.display = "none";
       });
     </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const underConstructionYes = document.getElementById("construction-yes");
+    const underConstructionNo = document.getElementById("construction-no");
+    const propertyType = document.getElementById("property-type");
+
+    const allOptions = [
+      { value: "property", text: "Enter property type" },
+      { value: "residential", text: "Residential" },
+      { value: "affordable", text: "Affordable" },
+      { value: "commercial", text: "Commercial" },
+      { value: "land", text: "Land" },
+    ];
+
+    const filterOptions = () => {
+      propertyType.innerHTML = ""; // Clear existing options
+      const optionsToShow =
+        underConstructionNo.checked
+          ? allOptions.filter((option) => option.value !== "land")
+          : allOptions;
+
+      optionsToShow.forEach((option) => {
+        const opt = document.createElement("option");
+        opt.value = option.value;
+        opt.textContent = option.text;
+        propertyType.appendChild(opt);
+      });
+    };
+
+    // Add event listeners
+    underConstructionYes.addEventListener("change", filterOptions);
+    underConstructionNo.addEventListener("change", filterOptions);
+
+    // Initial setup
+    filterOptions();
+  });
+</script>
     <script src="property.js"></script>
   </body>
 </html>

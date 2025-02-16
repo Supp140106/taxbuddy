@@ -213,9 +213,10 @@ The user data is as follows:
 Personal Info: ${person}
 Old Tax Calculation: ${taxcal.income_taxcalcold(taxable, person.age)}
 New Tax Calculation for AY 2024-25: ${taxcal.income_taxcalcnew_ay2425(taxabinc1)}
-New Tax Calculation for AY 2025-26: ${taxcal.income_taxcalcnew_ay2526(taxabinc2)}. Say Every thing in fullform.And write in a very friendly manner. Give the Wikipedia link of all
- the Sections involved in a tabular form where the user can copy the links fastly in BOLD LETTERS. Make the result very much presentable as it would be used in website user should understand it 
- .Good Readable format.`;
+New Tax Calculation for AY 2025-26: ${taxcal.income_taxcalcnew_ay2526(taxabinc2)}. Say Every thing in fullform.And write in a very friendly manner. Make the result very much presentable as it would be used in website user should understand it 
+ .Good Readable format. Use full forms for all terms and avoid using symbols like "*". Present the details in a professional yet friendly tone, making the content visually appealing and easy to understand for website users. Tailor the advice to the individual’s financial situation, ensuring it is relevant and beneficial. Mention key changes 
+ in Indian tax law that may impact their filings. Conclude by encouraging users
+  to seek personalized guidance from a qualified tax professional for the best outcomes.Make its readibility extremly good.`;
 
 
   

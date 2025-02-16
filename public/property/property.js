@@ -1,5 +1,9 @@
 let goback = document.getElementById("go-back")
 
+let alertstatement = document.getElementById("alertstatement")
+let aler = document.getElementById("dialog")
+
+
 
 
 
@@ -105,6 +109,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Please fill all the fields for selling a property.");
                 return;
             }
+
+
+            if(purchaseDate){
+                let today = new Date();
+                today.setHours(0,0,0,0)
+                let a = new Date(purchaseDate);
+                a.setHours(0,0,0,0)
+
+                if(today<a) {
+                    alert("Please Enter a correct Date!")
+                    return
+                }
+                
+
+            }
+
+
             let playload = {
                 purchaseDate :purchaseDate,
                 purchasePrice : purchasePrice,
@@ -136,4 +157,3 @@ goback.addEventListener("click", (event) => {
     document.getElementById("propertycal").style.display = "block";
     document.getElementById("sellresult").style.display = "none"
 });
-

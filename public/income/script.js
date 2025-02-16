@@ -177,7 +177,7 @@ document
         oldtax.innerText = `₹${data.old}`;
         newtax2024.innerText = `₹${data.new24}`;
         newtax2025.innerText = `₹${data.new25}`;
-        aistatement.innerText = `${data.statement}`
+        aistatement.innerText = `${data.statement.replaceAll("*", " ")}`
         data = JSON.stringify(data);
         localStorage.setItem("income-result",data)
 

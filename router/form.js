@@ -8,5 +8,7 @@ router.use("/property",express.static("./public/property"))
 
 router.use("/vehicle",express.static("./public/vehicle"))
 
+router.use("/stock",express.static("./public/stocks"))
+
 
 module.exports = router;

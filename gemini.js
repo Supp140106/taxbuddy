@@ -8,7 +8,7 @@ dotenv.config();
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 // Define the model
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 // Generate the response
 async function run(prompt) {

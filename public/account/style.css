@@ -4,114 +4,110 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f4f4f4;
+    background: black;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.541) 1px, transparent 1px),
+                      radial-gradient(circle, rgba(255, 255, 255, 0.795) 2px, transparent 2px);
+    background-size: 50px 50px, 75px 75px;
+    animation: twinkling 5s infinite;
+}
+
+@keyframes twinkling {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+    100% {
+        background-position: 50px 50px, 75px 75px;
+    }
 }
 
 .profile-card {
     background: #fff;
     margin: auto;
-    margin-top: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    border-radius: 15px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    padding: 20px;
-    width: 300px;
+    padding: 30px;
+    width: 350px;
 }
 
 .profile-card img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .profile-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 0;
     color: #333;
 }
 
 .profile-card p {
-    color: #777;
-    margin: 5px 0 0;
+    color: #555;
+    margin: 8px 0 0;
 }
 
-
 .summary-box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 600px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    margin: 30px auto;
+    max-width: 700px;
 }
 
 .tax-item {
     display: flex;
     justify-content: space-between;
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 12px;
 }
 
 .statement {
     margin-top: 20px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-left: 4px solid #4caf50;
+    padding: 15px;
+    background: #f1f1f1;
+    border-left: 5px solid #4caf50;
     font-style: italic;
 }
 
 .result {
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
-}
-
-#Taxsummary {
-    text-align: center; /* Horizontally centers the text */
-    margin: 0 auto;
-    margin-top: 10px;
-    padding-top: 10px;
+    margin-bottom: 8px;
 }
 
 .center-button {
     display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-    height: 10vh; /* Ensures the container takes full height */
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
     background-color: #00b312;
 }
 
-#go-back{
+#go-back {
     font-weight: 700;
     border-radius: 30px;
     width: fit-content;
     height: fit-content;
-    padding: 12px;
+    padding: 14px;
     border: none;
     background: #4caf50;
-
+    font-size: 16px;
 }
-
 
 .calculator {
-    /*background: white;*/
-    border-radius: 10px;
-    padding: 30px;
-    
+    border-radius: 15px;
+    padding: 40px;
     text-align: center;
-    width: 400px;
-}
-
-.summary-box {
-    margin-top: 20px;
-    text-align: left;
-    
+    width: 450px;
 }
 
 .payment-item {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -119,12 +115,12 @@ body {
 
 .payment-item label {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .payment-item span {
     float: right;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .payment-item.total span {
@@ -133,19 +129,11 @@ body {
 }
 
 .center-button {
-    margin-top: 20px;
+    margin-top: 25px;
 }
+
 button:hover {
     background: #00b312;
-}
-
-
-.statement {
-    margin-top: 20px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-left: 4px solid #4caf50;
-    font-style: italic;
 }
 
 .dialog {
@@ -162,20 +150,58 @@ button:hover {
 
 .dialog-content {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 25px;
+    border-radius: 15px;
     text-align: center;
-    width: 300px;
+    width: 350px;
 }
 
 .dialog-content h2 {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .dialog-content p {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-section{
+section {
     margin: auto;
+}
+
+#logout{
+    background-color: red;
+    color: white;
+    height: 30px;
+    width: 150px;
+    border-radius: 40px;
+    border: wheat;
+    cursor: pointer;
+}
+
+#logout:hover{
+    background-color: #d9534f;
+}
+
+/* Back Button Container */
+.back-button-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#go-back {
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+#go-back:hover {
+    background: #d9534f;
+    color: white;
 }

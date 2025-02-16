@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="taxbuddy.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header style="background-color: black;">
+    <div class="logo">TaxBuddy</div>
+    <nav>
+        <ul>
+            <li><a href="/getstarted">Back</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main>
+    <div class="card">
+        <h1>Capital Gains Tax Calculator</h1>
+        <form id="stockForm">
+            <!-- Purchase Price -->
+            <div class="form-group">
+                <label for="purchasePrice">Purchase Price of Stock (₹)</label>
+                <input type="number" id="purchasePrice" name="purchasePrice" required>
+            </div>
+
+            <!-- Selling Price -->
+            <div class="form-group">
+                <label for="sellingPrice">Selling Price of Stock (₹)</label>
+                <input type="number" id="sellingPrice" name="sellingPrice" required>
+            </div>
+
+            <!-- Number of Stocks -->
+            <div class="form-group">
+                <label for="numStocks">Number of Stocks</label>
+                <input type="number" id="numStocks" name="numStocks" required>
+            </div>
+            <div>
+                <label for="numStocks">Purchase Date :</label>
+                <input type="date" id="DateStock" name="numStocks" required>
+            </div><br>
+
+            <!-- Listed Stock -->
+            <div class="form-group">
+                <label>Is the Stock Listed?</label>
+                <div class="radio-options">
+                    <div class="box-option">
+                        <input type="radio" id="listedYes" name="listed" value="yes" required>
+                        <label for="listedYes">Yes</label>
+                    </div>
+                    <div class="box-option">
+                        <input type="radio" id="listedNo" name="listed" value="no" required>
+                        <label for="listedNo">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculate Button -->
+            <div class="center-button">
+                <button type="button" id="calculateBtn">Calculate</button>
+            </div>
+        </form>
+
+</main>
+
+
+<main>
+    <section class="calculator">
+        <h1>Your Tax Summary</h1>
+        <div class="summary-box">
+            <div class="payment-item total">
+                <label>Total Capital Gains Tax:</label>
+                <span id="capital-gains-tax">₹0</span>
+            </div>
+        <div class="statement">
+            <p id="statement">The tax details for your stock shares sale will be displayed here.</p>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer style="background-color: black;">
+    <p>&copy; 2025 Stock Market Calculator</p>
+</footer>
+
+<div class="background-animation"></div>
+<script src="script.js"></script>
+</body>
+</html>

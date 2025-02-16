@@ -3,6 +3,41 @@ const stampdata = require("../json/stampdatabase.json");
 const run = require("../gemini");
 const router = express.Router();
 
+const roadTaxData = {
+  "Andhra Pradesh": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 10.0 : 15.0 },
+  "Arunachal Pradesh": { "otherThanTwoWheeler": 10.0 },
+  "Assam": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 8.0 : 12.0 },
+  "Bihar": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 10.0 : 12.0 },
+  "Delhi": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 12.0 : 15.0 },
+  "Goa": { "otherThanTwoWheeler": 10.0 },
+  "Gujarat": { "otherThanTwoWheeler": (vehicleType) => vehicleType === "Luxury" ? 15.0 : 10.0 },
+  "Haryana": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 600000 ? 8.0 : exShowroomPrice <= 1000000 ? 10.0 : 12.0 },
+  "Himachal Pradesh": { "otherThanTwoWheeler": (engineCapacity) => engineCapacity <= 1500 ? 8.0 : 12.0 },
+  "Jammu & Kashmir": { "otherThanTwoWheeler": (engineCapacity) => engineCapacity <= 1500 ? 8.0 : 10.0 },
+  "Jharkhand": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 8.0 : 12.0 },
+  "Karnataka": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 500000 ? 13.0 : exShowroomPrice <= 1000000 ? 14.0 : 18.0 },
+  "Kerala": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 500000 ? 9.0 : 12.0 },
+  "Madhya Pradesh": { "otherThanTwoWheeler": (engineCapacity) => engineCapacity <= 1500 ? 8.0 : 10.0 },
+  "Maharashtra": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 10.0 : 15.0 },
+  "Manipur": { "otherThanTwoWheeler": 10.0 },
+  "Meghalaya": { "otherThanTwoWheeler": 10.0 },
+  "Nagaland": { "otherThanTwoWheeler": 10.0 },
+  "Tripura": { "otherThanTwoWheeler": 10.0 },
+  "Mizoram": { "otherThanTwoWheeler": (engineCapacity) => engineCapacity <= 1500 ? 8.0 : 10.0 },
+  "Odisha": { "otherThanTwoWheeler": (engineCapacity) => engineCapacity <= 1500 ? 8.0 : 12.0 },
+  "Punjab": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 600000 ? 8.0 : exShowroomPrice <= 1000000 ? 10.0 : 12.0 },
+  "Rajasthan": { "otherThanTwoWheeler": (engineCapacity) => engineCapacity <= 1500 ? 8.0 : 12.0 },
+  "Sikkim": { "otherThanTwoWheeler": 8.0 },
+  "Tamil Nadu": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 10.0 : 12.0 },
+  "Telangana": { "otherThanTwoWheeler": 10.0 },
+  "Uttar Pradesh": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 10.0 : 12.0 },
+  "Uttarakhand": { "otherThanTwoWheeler": (engineCapacity) => engineCapacity <= 1500 ? 8.0 : 10.0 },
+  "West Bengal": { "otherThanTwoWheeler": (exShowroomPrice) => exShowroomPrice <= 1000000 ? 10.0 : 12.0 },
+  "Default": { "otherThanTwoWheeler": 10.0 }
+};
+
+
+
 function getStampDutyPercentages(stateName) {
   // Find the state in the data
   const stateData = stampdata.find((item) => item.state === stateName);
@@ -53,12 +88,14 @@ router.post("/house/buying", async (req, res) => {
   let stampduty = propertycost * (getStampDutyPercentages(state) / 100); // Stamp duty at 5.5%
   let registration = propertycost * 0.01; // Registration at 1%
   let GST = 0;
-
+  let add = ""
   if (underconstruction) {
     if (type === "residential") GST = propertycost * 0.05;
     if (type === "affordable") GST = propertycost * 0.01;
     if (type === "commercial") GST = propertycost * 0.12;
     if (type === "land") GST = 0;
+    add = `We noticed that you are buying a under-construction property. We would recommend you to not buy a under-construction property, doing so you can save upto Rs ${propertycost*0.055} (5-6% GST) on the property value.\n`
+    
   }
 
   let TDS = 0;
@@ -101,7 +138,7 @@ router.post("/house/buying", async (req, res) => {
     GST: GST.toFixed(2),
     TDS: TDS.toFixed(2),
     totalPayable: payable.toFixed(2),
-    optimisation: aianswer.response.text(),
+    optimisation: `${add} ${aianswer.response.text()}`,
   });
 });
 
@@ -183,6 +220,13 @@ router.post("/house/selling", (req, res) => {
       }, you will save an amount of Rs.${shortTermSavings} (10% of the purchase price).`,
     });
   } else if (yearsDifference > 2) {
+
+    if(totalprice>=salePrice){
+      return res.json({
+        Tax : 0,
+        message: "Since there is no profit from the property you sold, you are not required to pay any capital gains tax."
+      })
+    }
     let ciiPurchaseYear;
       const ciiSaleYear = 363; // Fixed CII value for sale year
     if (totalprice < salePrice) {
@@ -203,34 +247,64 @@ router.post("/house/selling", (req, res) => {
           ciiPurchaseYear = 295;
           break;
         case 2019:
-          ciiPurchaseYear = 289;
+          ciiPurchaseYear = 285;
           break;
         case 2018:
-          ciiPurchaseYear = 280;
+          ciiPurchaseYear = 276;
           break;
         case 2017:
-          ciiPurchaseYear = 272;
+          ciiPurchaseYear = 268;
           break;
         case 2016:
-          ciiPurchaseYear = 264;
+          ciiPurchaseYear = 259;
           break;
         case 2015:
-          ciiPurchaseYear = 254;
+          ciiPurchaseYear = 247;
           break;
         case 2014:
-          ciiPurchaseYear = 240;
+          ciiPurchaseYear = 230;
           break;
         case 2013:
-          ciiPurchaseYear = 220;
+          ciiPurchaseYear = 210;
           break;
         case 2012:
-          ciiPurchaseYear = 200;
+          ciiPurchaseYear = 192;
           break;
         case 2011:
-          ciiPurchaseYear = 184;
+          ciiPurchaseYear = 176;
           break;
         case 2010:
-          ciiPurchaseYear = 167;
+          ciiPurchaseYear = 158;
+          break;
+        case 2009:
+          ciiPurchaseYear = 143;
+          break;
+        case 2008:
+          ciiPurchaseYear = 133;
+          break;
+        case 2007:
+          ciiPurchaseYear = 126;
+          break;
+        case 2006:
+          ciiPurchaseYear = 120;
+          break;
+        case 2005:
+          ciiPurchaseYear = 115;
+          break;
+        case 2004:
+          ciiPurchaseYear = 111;
+          break;
+        case 2003:
+          ciiPurchaseYear = 107;
+          break;
+        case 2002:
+          ciiPurchaseYear = 103;
+          break;
+        case 2001:
+          ciiPurchaseYear = 103;
+          break;
+        case 2000:
+          ciiPurchaseYear = 103;
           break;
         default:
           return res
@@ -506,13 +580,13 @@ function calculateInsurance(exShowroomPrice, vehicleCategory, isSecondHand) {
 
 // Function to calculate additional charges
 function calculateAdditionalCharges(includeAccessories, includeExtendedWarranty, exShowroomPrice) {
-  const accessoriesCost = includeAccessories ? 15000.0 : 0.0;
+  
   const extendedWarrantyCost = includeExtendedWarranty ? (exShowroomPrice * 2.0) / 100.0 : 0.0;
-  return accessoriesCost + extendedWarrantyCost;
+  return  extendedWarrantyCost;
 }
 
 // Route to calculate taxes and on-road price
-router.post('/car', (req, res) => {
+router.post('/car', async(req, res) => {
   try {
       let {
           state,
@@ -544,7 +618,8 @@ router.post('/car', (req, res) => {
 
       const totalTax = roadTax + gst + insurance + additionalCharges;
       const onRoadPrice = exShowroomPrice + totalTax;
-
+      let x = ""
+      if(state == "West Bengal") x = "Considering you are buying the vehicle in West Bengal, we would suggest you to buy the vehicle in Jharkhand doing so you will pay less taxes."
       // Send response
       res.status(200).json({
           exShowroomPrice,
@@ -554,7 +629,7 @@ router.post('/car', (req, res) => {
           additionalCharges,
           totalTax,
           onRoadPrice,
-          statement : (fuelType != "Electric")?`Buying an electric vehicle can save you upto 23% of taxes in GST which will reduce your Ex-Showroom price as well as fuel cost economy.` : ``
+          statement : (fuelType != "Electric")?`Buying an electric vehicle can save you upto 23% of taxes in GST which will reduce your Ex-Showroom price as well as fuel cost economy.\n ` : `You saved 23% of your GST taxes by opting for an electric vehicle`
       });
   } catch (error) {
       res.status(400).json({ error: error.message });
